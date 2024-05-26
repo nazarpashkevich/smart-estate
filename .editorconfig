@@ -1,4 +1,4 @@
-root = true
+sailroot = true
 
 [*]
 charset = utf-8
