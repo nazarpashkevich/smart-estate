@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import HeroSection from "@/Components/Pages/Home/HeroSection.vue";
 import AboutSection from "@/Components/Pages/Home/AboutSection.vue";
 import FeaturesSection from "@/Components/Pages/Home/FeaturesSection.vue";
