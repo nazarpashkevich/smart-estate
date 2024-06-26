@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Domains\Common\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -32,7 +32,7 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'auth' => [
+            'auth'  => [
                 'user' => $request->user(),
             ],
             'ziggy' => fn () => [

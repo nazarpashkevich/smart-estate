@@ -22,6 +22,8 @@ export default defineComponent({
 
 <template>
     <div class="w-full flex bg-green gap-6 px-12 py-4 border-slate-50/40 border-b">
+        <div class="bg-cover bg-center w-48 mr-16" :style='{backgroundImage: `url("/images/logo.png")`}'>
+        </div>
         <template v-for="(item, index) in items">
             <Link
                 class="px-6 px-2 cursor-pointer text-white hover:text-gray-200 border-b-4 border-b-transparent

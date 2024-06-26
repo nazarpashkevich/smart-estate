@@ -27,7 +27,7 @@ export default defineComponent({
          :style="{backgroundImage: 'url(\'/images/white-abstract-background.jpg\')'}">
         <template v-for="feature in features">
             <div class="bg-white rounded-lg shadow-lg px-12 py-8 flex gap-8 text-center">
-                <div class="w-1/3 bg-cover"
+                <div class="w-1/3 bg-cover h-16"
                      :style="{backgroundImage: `url('${feature.image}')`}"></div>
                 <p class="w-2/3 my-auto my-6">{{ feature.text }}</p>
             </div>
