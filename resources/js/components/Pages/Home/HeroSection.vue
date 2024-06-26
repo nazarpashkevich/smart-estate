@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HeroMenu from "@/Components/Pages/Home/HeroMenu.vue";
-import HeroSearch from "@/Components/Pages/Home/HeroSearch.vue";
+import HeroMenu from "@/components/Pages/Home/HeroMenu.vue";
+import HeroSearch from "@/components/Pages/Home/HeroSearch.vue";
 
 export default defineComponent({
     name: "HeroSection",
@@ -12,7 +12,7 @@ export default defineComponent({
 <template>
     <div
         class="flex flex-col h-[33rem] bg-contain bg-[url('https://ssl.cdn-redfin.com/v525.2.0/images/homepage/banners/genHomepageDesktopBanner/HPTO_2120-NW-97th-St-Seattle_PremierHP.jpg')]">
-       <hero-menu/>
+        <hero-menu/>
         <div class="flex h-full">
             <div class="w-1/2 flex flex-col">
                 <div class="my-auto mx-24 bg-white rounded-lg shadow-lg border-b py-4 px-6">

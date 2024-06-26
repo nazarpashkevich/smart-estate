@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { Link } from '@inertiajs/vue3'
-import MainHeader from "@/Layouts/Main/MainHeader.vue";
-import MainFooter from "@/Layouts/Main/MainFooter.vue";
+import MainHeader from "@/layouts/Main/MainHeader.vue";
+import MainFooter from "@/layouts/Main/MainFooter.vue";
 
 export default defineComponent({
     name: "MainLayout",
