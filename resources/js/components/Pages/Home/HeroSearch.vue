@@ -2,7 +2,13 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: "HeroSearch"
+    name: "HeroSearch",
+    props: {
+        value: {
+            type: String,
+            default: ''
+        }
+    }
 })
 </script>
 
@@ -18,12 +24,14 @@ export default defineComponent({
                 </svg>
             </div>
             <form :action="route('search.index')" method="GET">
-                <input class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
+                <input :value="value"
+                       class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
                     focus:ring-blue-500 focus:border-blue-500"
                        name="q"
                        placeholder="Your location&preferences&promt"
                        required
-                       type="search"/>
+                       type="search"
+                />
                 <button class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4
                     focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
                         type="submit">

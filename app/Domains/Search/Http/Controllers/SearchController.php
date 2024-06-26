@@ -2,12 +2,13 @@
 
 namespace App\Domains\Search\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class SearchController
 {
-    public function index(): \Inertia\Response
+    public function index(Request $request): \Inertia\Response
     {
-        return Inertia::render('Search/Index', []);
+        return Inertia::render('Search/Index', ['searchQuery' => $request->get('q')]);
     }
 }

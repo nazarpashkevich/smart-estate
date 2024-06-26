@@ -1,17 +1,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import MainLayout from "@/Layouts/MainLayout.vue";
 
 export default defineComponent({
-    name: "Index",
-    components: { MainLayout }
+    name: "EstateItemCard",
+    props:
 })
 </script>
 
 <template>
-    <MainLayout>
 
-    </MainLayout>
 </template>
 
 <style scoped>
