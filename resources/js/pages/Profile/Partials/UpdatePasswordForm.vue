@@ -47,9 +47,9 @@ const updatePassword = () => {
 
         <form class="mt-6 space-y-6" @submit.prevent="updatePassword">
             <div>
-                <InputLabel for="current_password" value="Current Password"/>
+                <input-label for="current_password" value="Current Password"/>
 
-                <TextInput
+                <text-input
                     id="current_password"
                     ref="currentPasswordInput"
                     v-model="form.current_password"
@@ -58,13 +58,13 @@ const updatePassword = () => {
                     type="password"
                 />
 
-                <InputError :message="form.errors.current_password" class="mt-2"/>
+                <input-error :message="form.errors.current_password" class="mt-2"/>
             </div>
 
             <div>
-                <InputLabel for="password" value="New Password"/>
+                <input-label for="password" value="New Password"/>
 
-                <TextInput
+                <text-input
                     id="password"
                     ref="passwordInput"
                     v-model="form.password"
@@ -73,13 +73,13 @@ const updatePassword = () => {
                     type="password"
                 />
 
-                <InputError :message="form.errors.password" class="mt-2"/>
+                <input-error :message="form.errors.password" class="mt-2"/>
             </div>
 
             <div>
-                <InputLabel for="password_confirmation" value="Confirm Password"/>
+                <input-label for="password_confirmation" value="Confirm Password"/>
 
-                <TextInput
+                <text-input
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     autocomplete="new-password"
@@ -87,20 +87,20 @@ const updatePassword = () => {
                     type="password"
                 />
 
-                <InputError :message="form.errors.password_confirmation" class="mt-2"/>
+                <input-error :message="form.errors.password_confirmation" class="mt-2"/>
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <primary-button :disabled="form.processing">Save</primary-button>
 
-                <Transition
+                <transition
                     enter-active-class="transition ease-in-out"
                     enter-from-class="opacity-0"
                     leave-active-class="transition ease-in-out"
                     leave-to-class="opacity-0"
                 >
                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
-                </Transition>
+                </transition>
             </div>
         </form>
     </section>

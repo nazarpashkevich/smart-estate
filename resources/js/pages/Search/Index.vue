@@ -15,7 +15,7 @@ export default defineComponent({
             default: ''
         },
         results: {
-            type: Array as EstateItem[],
+            type: Array<EstateItem>,
             default: []
         }
     }

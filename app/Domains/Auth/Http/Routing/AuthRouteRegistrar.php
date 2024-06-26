@@ -9,7 +9,6 @@ use App\Domains\Auth\Http\Controllers\EmailVerificationPromptController;
 use App\Domains\Auth\Http\Controllers\NewPasswordController;
 use App\Domains\Auth\Http\Controllers\PasswordController;
 use App\Domains\Auth\Http\Controllers\PasswordResetLinkController;
-use App\Domains\Auth\Http\Controllers\ProfileController;
 use App\Domains\Auth\Http\Controllers\RegisteredUserController;
 use App\Domains\Auth\Http\Controllers\VerifyEmailController;
 use App\Domains\Common\Http\Routing\RouteRegistrar;
@@ -17,25 +16,32 @@ use Illuminate\Contracts\Routing\Registrar;
 
 class AuthRouteRegistrar extends RouteRegistrar
 {
-    protected array $middlewares = ['web', 'auth'];
-
     public function map(Registrar $route): void
     {
-        $route->group(['middleware' => 'guest'], static function (Registrar $route) {
-            $route->group(['controller' => RegisteredUserController::class], static function (Registrar $route) {
-                $route->get('register', 'create')->name('register');
-                $route->post('register', 'store');
-            });
+        $route->group(['middleware' => ['guest', ...$this->getMiddlewares()]], static function (Registrar $route) {
+            $route->group(
+                ['controller' => RegisteredUserController::class, 'prefix' => 'register'],
+                static function (Registrar $route) {
+                    $route->get('', 'create')->name('register');
+                    $route->post('', 'store');
+                }
+            );
 
-            $route->group(['controller' => AuthenticatedSessionController::class], static function (Registrar $route) {
-                $route->get('login', 'create')->name('login');
-                $route->post('login', 'store');
-            });
+            $route->group(
+                ['controller' => AuthenticatedSessionController::class, 'prefix' => 'login'],
+                static function (Registrar $route) {
+                    $route->get('', 'create')->name('login');
+                    $route->post('', 'store');
+                }
+            );
 
-            $route->group(['controller' => PasswordResetLinkController::class], static function (Registrar $route) {
-                $route->get('forgot-password', 'create')->name('password.request');
-                $route->post('forgot-password', 'store')->name('password.email');
-            });
+            $route->group(
+                ['controller' => PasswordResetLinkController::class, 'prefix' => 'forgot-password'],
+                static function (Registrar $route) {
+                    $route->get('', 'create')->name('password.request');
+                    $route->post('', 'store')->name('password.email');
+                }
+            );
 
             $route->group(['controller' => NewPasswordController::class], static function (Registrar $route) {
                 $route->get('reset-password/{token}', 'create')->name('password.reset');
@@ -65,13 +71,6 @@ class AuthRouteRegistrar extends RouteRegistrar
             $route->put('password', [PasswordController::class, 'update'])->name('password.update');
 
             $route->post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-            // @todo to user domain
-            $route->group(['controller' => ProfileController::class], static function (Registrar $route) {
-                $route->get('/profile', 'edit')->name('profile.edit');
-                $route->patch('/profile', 'update')->name('profile.update');
-                $route->delete('/profile', 'destroy')->name('profile.destroy');
-            });
         });
     }
 }

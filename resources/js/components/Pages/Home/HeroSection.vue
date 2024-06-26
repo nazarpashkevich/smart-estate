@@ -2,17 +2,18 @@
 import { defineComponent } from 'vue'
 import HeroMenu from "@/components/Pages/Home/HeroMenu.vue";
 import HeroSearch from "@/components/Pages/Home/HeroSearch.vue";
+import MainHeader from "@/layouts/Main/MainHeader.vue";
 
 export default defineComponent({
     name: "HeroSection",
-    components: { HeroSearch, HeroMenu }
+    components: { MainHeader, HeroSearch, HeroMenu }
 })
 </script>
 
 <template>
     <div
         class="flex flex-col h-[33rem] bg-contain bg-[url('https://ssl.cdn-redfin.com/v525.2.0/images/homepage/banners/genHomepageDesktopBanner/HPTO_2120-NW-97th-St-Seattle_PremierHP.jpg')]">
-        <hero-menu/>
+        <main-header/>
         <div class="flex h-full">
             <div class="w-1/2 flex flex-col">
                 <div class="my-auto mx-24 bg-white rounded-lg shadow-lg border-b py-4 px-6">

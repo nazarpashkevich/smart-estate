@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Domains\Auth\Http\Routing\AuthRouteRegistrar;
 use App\Domains\Common\Http\Routing\RouteRegistrar;
+use App\Domains\Dashboard\Http\Routing\DashboardRouteRegistrar;
 use App\Domains\Home\Http\Routing\HomeRoutesRegistrar;
 use App\Domains\Search\Http\Routing\SearchRoutesRegistrar;
+use App\Domains\User\Http\Routing\UserRouteRegistrar;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -17,8 +19,10 @@ class RouteServiceProvider extends ServiceProvider
 {
     protected array $registrars = [
         AuthRouteRegistrar::class,
+        DashboardRouteRegistrar::class,
         HomeRoutesRegistrar::class,
         SearchRoutesRegistrar::class,
+        UserRouteRegistrar::class,
     ];
 
     /**
@@ -45,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
                 );
             }
 
-            (new $registrar())->map($router);
+            (new $registrar())->mapRoutes($router);
         }
     }
 }

@@ -4,8 +4,8 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     name: "Pagination",
     props: {
-        data: {
-            type: Object as Object,
+        meta: {
+            type: Object,
             required: true
         }
     }

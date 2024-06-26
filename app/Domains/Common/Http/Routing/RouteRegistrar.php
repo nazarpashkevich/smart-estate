@@ -10,12 +10,17 @@ abstract class RouteRegistrar
 
     protected string $prefix = '';
 
-    abstract public function map(Registrar $route): void;
+    public function mapRoutes(Registrar $route): void
+    {
+        $route->group(['middleware' => $this->getMiddlewares()], fn (Registrar $route) => $this->map($route));
+    }
 
     public function getMiddlewares(): array
     {
         return $this->middlewares;
     }
+
+    abstract public function map(Registrar $route): void;
 
     public function getPrefix(): string
     {

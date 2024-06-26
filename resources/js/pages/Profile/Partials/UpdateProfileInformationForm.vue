@@ -30,9 +30,9 @@ const form = useForm({
 
         <form class="mt-6 space-y-6" @submit.prevent="form.patch(route('profile.update'))">
             <div>
-                <InputLabel for="name" value="Name"/>
+                <input-label for="name" value="Name"/>
 
-                <TextInput
+                <text-input
                     id="name"
                     v-model="form.name"
                     autocomplete="name"
@@ -42,13 +42,13 @@ const form = useForm({
                     type="text"
                 />
 
-                <InputError :message="form.errors.name" class="mt-2"/>
+                <input-error :message="form.errors.name" class="mt-2"/>
             </div>
 
             <div>
-                <InputLabel for="email" value="Email"/>
+                <input-label for="email" value="Email"/>
 
-                <TextInput
+                <text-input
                     id="email"
                     v-model="form.email"
                     autocomplete="username"
@@ -57,7 +57,7 @@ const form = useForm({
                     type="email"
                 />
 
-                <InputError :message="form.errors.email" class="mt-2"/>
+                <input-error :message="form.errors.email" class="mt-2"/>
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
@@ -82,16 +82,16 @@ const form = useForm({
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <primary-button :disabled="form.processing">Save</primary-button>
 
-                <Transition
+                <transition
                     enter-active-class="transition ease-in-out"
                     enter-from-class="opacity-0"
                     leave-active-class="transition ease-in-out"
                     leave-to-class="opacity-0"
                 >
                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
-                </Transition>
+                </transition>
             </div>
         </form>
     </section>
