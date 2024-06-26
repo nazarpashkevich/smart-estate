@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HeroMenu from "@/components/Pages/Home/HeroMenu.vue";
-import HeroSearch from "@/components/Pages/Home/HeroSearch.vue";
+import HeroMenu from "./HeroMenu.vue";
+import HeroSearch from "./HeroSearch.vue";
 import MainHeader from "@/layouts/Main/MainHeader.vue";
 
 export default defineComponent({
