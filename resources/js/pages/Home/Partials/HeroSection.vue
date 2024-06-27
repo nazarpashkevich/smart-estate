@@ -1,12 +1,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import HeroMenu from "./HeroMenu.vue";
-import HeroSearch from "./HeroSearch.vue";
 import MainHeader from "@/layouts/Main/MainHeader.vue";
+import SearchForm from "@/components/Common/SearchForm.vue";
 
 export default defineComponent({
     name: "HeroSection",
-    components: { MainHeader, HeroSearch, HeroMenu }
+    components: { SearchForm, MainHeader, HeroMenu }
 })
 </script>
 
@@ -20,7 +20,7 @@ export default defineComponent({
                     <p class="mb-4 text-sm">
                         Looking for apartment? Choose your location and get the best options.
                     </p>
-                    <hero-search/>
+                    <search-form/>
                 </div>
             </div>
             <div class="w-1/2 flex">

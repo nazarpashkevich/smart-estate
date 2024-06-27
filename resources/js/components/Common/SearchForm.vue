@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: "HeroSearch",
+    name: "SearchForm",
     props: {
         value: {
             type: String,

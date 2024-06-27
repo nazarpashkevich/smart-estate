@@ -6,6 +6,7 @@ import DropdownLink from '@/components/DropdownLink.vue';
 import NavLink from '@/components/NavLink.vue';
 import ResponsiveNavLink from '@/components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import MainFooter from "@/layouts/Main/MainFooter.vue";
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -21,7 +22,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('home')">
-                                    <ApplicationLogo
+                                    <application-logo
                                         class="block h-9 fill-current text-gray-800"
                                     />
                                 </Link>
@@ -29,16 +30,25 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :active="route().current('dashboard.index')" :href="route('dashboard.index')">
+                                <nav-link
+                                    :active="route().current('dashboard.index')"
+                                    :href="route('dashboard.index')"
+                                >
                                     Dashboard
-                                </NavLink>
+                                </nav-link>
+                                <nav-link
+                                    :active="route().current('personal.estate.*')"
+                                    :href="route('personal.estate.index')"
+                                >
+                                    Estate
+                                </nav-link>
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
-                                <Dropdown align="right" width="48">
+                                <dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button
@@ -64,12 +74,12 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile</DropdownLink>
-                                        <DropdownLink :href="route('logout')" as="button" method="post">
+                                        <dropdown-link :href="route('profile.edit')"> Profile</dropdown-link>
+                                        <dropdown-link :href="route('logout')" as="button" method="post">
                                             Log Out
-                                        </DropdownLink>
+                                        </dropdown-link>
                                     </template>
-                                </Dropdown>
+                                </dropdown>
                             </div>
                         </div>
 
@@ -112,10 +122,10 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :active="route().current('dashboard.index')"
-                                           :href="route('dashboard.index')">
+                        <responsive-nav-link :active="route().current('dashboard.index')"
+                                             :href="route('dashboard.index')">
                             Dashboard
-                        </ResponsiveNavLink>
+                        </responsive-nav-link>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -128,10 +138,11 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" as="button" method="post">
+                            <responsive-nav-link :href="route('dashboard.index')"> Dashboard</responsive-nav-link>
+                            <responsive-nav-link :href="route('profile.edit')"> Profile</responsive-nav-link>
+                            <responsive-nav-link :href="route('logout')" as="button" method="post">
                                 Log Out
-                            </ResponsiveNavLink>
+                            </responsive-nav-link>
                         </div>
                     </div>
                 </div>
@@ -149,5 +160,6 @@ const showingNavigationDropdown = ref(false);
                 <slot/>
             </main>
         </div>
+        <main-footer/>
     </div>
 </template>

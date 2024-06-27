@@ -8,7 +8,7 @@ use Illuminate\Contracts\Routing\Registrar;
 
 class HomeRoutesRegistrar extends RouteRegistrar
 {
-    protected array $middlewares = ['web', 'auth'];
+    protected array $middlewares = ['web'];
 
     public function map(Registrar $route): void
     {

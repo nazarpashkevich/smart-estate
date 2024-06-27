@@ -1,13 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import MainLayout from "@/layouts/MainLayout.vue";
-import HeroSearch from "@/components/Pages/Home/HeroSearch.vue";
 import EstateItemCard from "@/components/Estate/EstateItemCard.vue";
 import { EstateItem } from "@/contracts/estate-item";
+import SearchForm from "@/components/Common/SearchForm.vue";
 
 export default defineComponent({
     name: "Index",
-    components: { EstateItemCard, HeroSearch, MainLayout },
+    components: { SearchForm, EstateItemCard, MainLayout },
     data: () => ({}),
     props: {
         searchQuery: {
@@ -29,7 +29,7 @@ export default defineComponent({
                 <div class="h-42 flex-1 border rounded-lg shadow-lg bg-white py-6 px-8">
                     <h1 class="text-3xl bold">Hey, we have found 123 results for you!</h1>
                     <p class="mt-2 mb-6 text-sm">You always free to change search query</p>
-                    <hero-search :value="searchQuery"/>
+                    <search-form :value="searchQuery"/>
                 </div>
                 <div class="h-42 flex-1 border rounded-lg shadow-lg bg-white px-8">
                     <template v-for="item in results">
