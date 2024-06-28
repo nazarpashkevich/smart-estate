@@ -2,6 +2,7 @@
 
 namespace App\Domains\Estate\Services;
 
+use App\Domains\Common\Values\SortValue;
 use App\Domains\Estate\Data\EstateItemData;
 use App\Domains\Estate\Models\EstateItem;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -28,9 +29,12 @@ class EstateItemService
     /**
      * @return \Illuminate\Pagination\LengthAwarePaginator<\App\Domains\Estate\Models\EstateItem>
      */
-    public function list(): LengthAwarePaginator
+    public function list(?SortValue $sort = null): LengthAwarePaginator
     {
-        return EstateItem::query()
-            ->paginate(5);
+        $query = EstateItem::query();
+
+        $sort?->applyTo($query);
+
+        return $query->paginate(2);
     }
 }

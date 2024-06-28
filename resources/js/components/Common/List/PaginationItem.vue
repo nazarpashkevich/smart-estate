@@ -29,7 +29,11 @@ export default defineComponent({
     },
     methods: {
         navigate() {
-            router.visit(this.path, { data: { [this.pageName]: this.page } })
+            const params = new URLSearchParams(window.location.search)
+
+            params.set(this.pageName, this.page);
+
+            router.visit(this.path, { data: params })
         }
     }
 });

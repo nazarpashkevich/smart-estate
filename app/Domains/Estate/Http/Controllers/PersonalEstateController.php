@@ -4,6 +4,7 @@ namespace App\Domains\Estate\Http\Controllers;
 
 use App\Domains\Estate\Data\EstateItemData;
 use App\Domains\Estate\Http\Requests\EstateItemRequest;
+use App\Domains\Estate\Http\Requests\EstateItemsRequest;
 use App\Domains\Estate\Models\EstateItem;
 use App\Domains\Estate\Services\EstateItemService;
 use F9Web\ApiResponseHelpers;
@@ -18,10 +19,10 @@ class PersonalEstateController
     {
     }
 
-    public function index(): \Inertia\Response
+    public function index(EstateItemsRequest $request): \Inertia\Response
     {
         return Inertia::render('Personal/Estate/Index', [
-            'items' => EstateItemData::toWrap($this->service->list()),
+            'items' => EstateItemData::toWrap($this->service->list(sort: $request->sort())),
         ]);
     }
 
