@@ -13,17 +13,18 @@ return new class extends Migration {
         Schema::create('estate_items', function (Blueprint $table) {
             $table->id();
             $table->string('preview')->nullable();
-            $table->text('description')->default('');
+            $table->text('description');
+            $table->string('type');
             $table->tinyInteger('rooms')->unsigned()->index();
             $table->tinyInteger('floor')->unsigned()->index();
             $table->integer('year_of_build')->unsigned();
             $table->integer('square')->unsigned();
             $table->tinyInteger('bedrooms')->default(1)->unsigned();
-            $table->boolean('hasParking')->default(false);
+            $table->boolean('has_parking')->default(false);
             $table->float('price')->unsigned();
             $table->float('lat')->nullable();
             $table->float('lng')->nullable();
-            $table->json('features')->default('{}');
+            $table->json('features');
             $table->timestamps();
         });
     }

@@ -4,7 +4,6 @@ namespace App\Domains\Estate\Models;
 
 use App\Domains\Estate\Enums\EstateItemType;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 /**
@@ -37,6 +36,6 @@ class EstateItem extends Model
     {
         $item = parent::toArray();
 
-        return array_fill_keys(Arr::map(array_keys($item), fn (string $field) => Str::camel($field)), $item);
+        return array_combine(array_map([Str::class, 'camel'], array_keys($item)), array_values($item));
     }
 }

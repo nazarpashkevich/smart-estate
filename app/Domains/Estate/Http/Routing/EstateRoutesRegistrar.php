@@ -21,6 +21,9 @@ class EstateRoutesRegistrar extends RouteRegistrar
         ], static function (Registrar $route) {
             $route->get('', 'index')->name('index');
             $route->get('create', 'create')->name('create');
+
+            // api
+            $route->post('', 'store')->name('store');
         });
     }
 }

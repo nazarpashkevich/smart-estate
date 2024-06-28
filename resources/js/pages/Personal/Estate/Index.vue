@@ -4,11 +4,18 @@ import UserLayout from "@/layouts/UserLayout.vue";
 import PrimaryButton from "@/components/PrimaryButton.vue";
 import EstateList from "@/components/Estate/EstateList.vue";
 import { Head } from "@inertiajs/vue3";
+import { EstateItem } from "@/contracts/estate-item";
+import { BaseData } from "@/contracts/base";
 
 export default defineComponent({
     name: "Create",
     components: { EstateList, PrimaryButton, UserLayout, Head },
-    props: {}
+    props: {
+        items: {
+            type: Object as BaseData<EstateItem>,
+            required: true
+        }
+    }
 });
 </script>
 
@@ -28,7 +35,7 @@ export default defineComponent({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <estate-list :items="[{}]"></estate-list>
+                    <estate-list :items="items.data"></estate-list>
                 </div>
             </div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

@@ -22,7 +22,7 @@ export default defineComponent({
             </div>
         </div>
         <div class="w-2/3">
-            <h3 class="text-lg font-semibold mb-4">Some title</h3>
+            <h3 class="text-lg font-semibold mb-4">Some title ({{ item.id }})</h3>
             <ul class="list-disc text-gray-600 space-y-1 list-inside">
                 <li>feature 1</li>
                 <li>feature 2</li>

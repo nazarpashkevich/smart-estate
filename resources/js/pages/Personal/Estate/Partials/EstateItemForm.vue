@@ -34,8 +34,8 @@ export default defineComponent({
         }
     },
     methods: {
-        save(e) {
-            console.log(this.form);
+        save() {
+            this.form.post(route('personal.estate.store'));
         }
     },
     setup(props) {
@@ -120,7 +120,7 @@ export default defineComponent({
                 <input-label for="preview" value="Preview"/>
                 <image-input
                     id="preview"
-                    :model="form.preview"
+                    v-model="form.preview"
                     class="mt-1 block w-full"
                     required
                 />
