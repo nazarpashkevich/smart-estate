@@ -11,13 +11,13 @@ use Spatie\LaravelData\Casts\EnumCast;
 class EstateItemData extends BaseData
 {
     public function __construct(
-        public string $preview,
         public string $description,
         #[WithCast(EnumCast::class)]
         public EstateItemType $type,
         public int $yearOfBuild,
         public float $square,
         public float $price,
+        public ?string $preview = null,
         public ?float $lat = null,
         public ?float $lng = null,
         public int $rooms = 1,
@@ -37,7 +37,7 @@ class EstateItemData extends BaseData
 
         $estateItem ??= new EstateItem();
         $estateItem->fill([
-            'preview'       => $this->preview,
+            'preview'       => $this->preview ?? $estateItem->preview,
             'description'   => $this->description,
             'type'          => $this->type,
             'year_of_build' => $this->yearOfBuild,

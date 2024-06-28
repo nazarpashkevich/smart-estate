@@ -35,13 +35,25 @@ export default defineComponent({
         }
     },
     mounted() {
-        this.map = L.map('map').setView([51.496091, -0.137535], 6);
+        const mapCenter = { lat: 51.496091, lng: -0.137535 };
+
+        if (this.lat && this.lng) {
+            mapCenter.lat = this.lat;
+            mapCenter.lng = this.lng;
+        }
+
+        this.map = L.map('map').setView(mapCenter, 6);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(this.map);
 
         this.map.on('click', this.onMapClick);
+
+        if (this.lat && this.lng) {
+            // add mark if it is editing
+            this.onMapClick({ latlng: { lat: this.lat, lng: this.lng } })
+        }
     },
 
 });

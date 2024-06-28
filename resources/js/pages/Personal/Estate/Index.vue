@@ -6,10 +6,11 @@ import EstateList from "@/components/Estate/EstateList.vue";
 import { Head } from "@inertiajs/vue3";
 import { EstateItem } from "@/contracts/estate-item";
 import { BaseData } from "@/contracts/base";
+import Pagination from "@/components/Common/List/Pagination.vue";
 
 export default defineComponent({
     name: "Create",
-    components: { EstateList, PrimaryButton, UserLayout, Head },
+    components: { Pagination, EstateList, PrimaryButton, UserLayout, Head },
     props: {
         items: {
             type: Object as BaseData<EstateItem>,
@@ -35,7 +36,10 @@ export default defineComponent({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <estate-list :items="items.data"></estate-list>
+                    <estate-list :items="items.data" :personal-view="true"/>
+                    <div>
+                        <pagination :meta="items.meta"/>
+                    </div>
                 </div>
             </div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

@@ -38,13 +38,14 @@ export default defineComponent({
              v-on:click="showDropdown = !showDropdown">
             <p class="text-sm">{{ displayValue }}</p>
             <span
-                :class="`rotate-${showDropdown ? '[225deg]' : '45'}`"
+
+                :class="showDropdown ? 'rotate-[225deg]' : 'rotate-45'"
                 class="absolute top-2/4 right-4 border-b border-r border-gray-600 w-2 h-2 translate-y-[-50%]
                  transition-transform"
             >
             </span>
             <ul v-if="showDropdown"
-                class="absolute z-40 w-full top-full left-0 border border-gray-300 rounded-b-lg bg-white">
+                class="absolute z-[9999] w-full top-full left-0 border border-gray-300 rounded-b-lg bg-white">
                 <template v-for="option in options">
                     <li
                         class="w-full py-2 px-4 hover:bg-gray-100 cursor-pointer"

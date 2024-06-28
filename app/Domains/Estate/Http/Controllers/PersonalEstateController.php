@@ -4,6 +4,7 @@ namespace App\Domains\Estate\Http\Controllers;
 
 use App\Domains\Estate\Data\EstateItemData;
 use App\Domains\Estate\Http\Requests\EstateItemRequest;
+use App\Domains\Estate\Models\EstateItem;
 use App\Domains\Estate\Services\EstateItemService;
 use F9Web\ApiResponseHelpers;
 use Illuminate\Http\RedirectResponse;
@@ -34,5 +35,17 @@ class PersonalEstateController
     public function create(): \Inertia\Response
     {
         return Inertia::render('Personal/Estate/Create');
+    }
+
+    public function edit(EstateItem $estateItem): \Inertia\Response
+    {
+        return Inertia::render('Personal/Estate/Edit', ['item' => EstateItemData::from($estateItem)->toArray()]);
+    }
+
+    public function update(EstateItem $estateItem, EstateItemRequest $request): RedirectResponse
+    {
+        $this->service->update($estateItem, $request->toData());
+
+        return redirect(route('personal.estate.index'));
     }
 }

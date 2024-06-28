@@ -17,12 +17,20 @@ class EstateItemService
         return $estateItem;
     }
 
+    public function update(EstateItem $estateItem, EstateItemData $data): EstateItem
+    {
+        $estateItem = $data->toModel($estateItem);
+        $estateItem->save();
+
+        return $estateItem;
+    }
+
     /**
      * @return \Illuminate\Pagination\LengthAwarePaginator<\App\Domains\Estate\Models\EstateItem>
      */
     public function list(): LengthAwarePaginator
     {
         return EstateItem::query()
-            ->paginate(2);
+            ->paginate(5);
     }
 }

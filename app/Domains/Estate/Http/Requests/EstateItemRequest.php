@@ -24,7 +24,7 @@ class EstateItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'preview'     => ['image', 'required'],
+            'preview'     => ['image', 'nullable'],
             'description' => ['string'],
             'rooms'       => ['integer', 'min:1'],
             'floor'       => ['integer', 'min:1'],
@@ -42,7 +42,11 @@ class EstateItemRequest extends FormRequest
 
     public function toData(): EstateItemData
     {
-        $preview = app(SaveFileAction::class)->handle($this->file('preview'));
+        $preview = null;
+
+        if ($this->hasFile('preview')) {
+            $preview = app(SaveFileAction::class)->handle($this->file('preview'));
+        }
 
         return EstateItemData::from([...$this->all(), 'preview' => $preview]);
     }

@@ -10,6 +10,6 @@ class SaveFileAction
 
     public function handle(UploadedFile $file): string
     {
-        return $file->storeAs(static::STORAGE_PATH, $file->getClientOriginalName());
+        return '/storage/' . $file->store(static::STORAGE_PATH, 'public');
     }
 }

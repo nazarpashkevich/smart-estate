@@ -29,13 +29,27 @@ export default defineComponent({
     },
     props: {
         item: {
-            type: null | Object as EstateItem,
+            type: Object as EstateItem,
             default: null
         }
     },
     methods: {
         save() {
-            this.form.post(route('personal.estate.store'));
+
+            if (this.item) { // updating
+                if (typeof this.form.preview === 'string') {
+                    // nothing
+                    this.form.preview = null;
+                }
+                this.form.transform((data) => ({
+                    ...data,
+                    _method: 'put'
+                }));
+
+                this.form.post(route('personal.estate.update', this.item.id));
+            } else {
+                this.form.post(route('personal.estate.store'));
+            }
         }
     },
     setup(props) {
@@ -63,9 +77,7 @@ export default defineComponent({
         const maxRooms = 6;
         const rooms = Array.from(Array(maxRooms).keys()).map((value: number) => {
                 let item = value + 1;
-                if (item === maxRooms) {
-                    item += '+';
-                }
+
                 return { key: item, value: item }
             }
         );
@@ -74,9 +86,7 @@ export default defineComponent({
         const maxBedrooms = 4;
         const bedrooms = Array.from(Array(maxBedrooms).keys()).map((value: number) => {
                 let item = value + 1;
-                if (item === maxRooms) {
-                    item += '+';
-                }
+             
                 return { key: item, value: item }
             }
         );
