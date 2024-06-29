@@ -127,7 +127,7 @@ export default defineComponent({
                     </div>
                     <div :class="showFilters ? 'h-56 opacity-1' : 'h-0 opacity-0'"
                          class="transition-height duration-150 ease-in-out">
-                        <div class="py-3 px-12 flex border-b">
+                        <div v-if="showFilters" class="py-3 px-12 flex border-b">
                             <filters @submit="onSubmitFilters">
                                 <template #filters>
                                     <div class="flex gap-12">

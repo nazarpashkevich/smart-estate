@@ -15,16 +15,19 @@ export default defineComponent({
 
 <template>
     <div class="flex gap-12">
-        <div class="w-1/3">
+        <div class="w-1/2">
             <div
                 :style="{ backgroundImage: `url(${item.preview})`}"
                 class="bg-cover w-full h-full rounded-sm">
             </div>
         </div>
-        <div class="w-2/3">
-            <h3 class="text-2xl font-semibold mb-4">
+        <div class="w-1/2">
+            <Link
+                :href="route('estate.show', item.id)"
+                class="text-2xl font-semibold mb-4 hover:text-blue-800 cursor-pointer"
+            >
                 Buy {{ item.rooms }} rooms {{ item.type }}, {{ item.floor }} floor!
-            </h3>
+            </Link>
             <p class="text-sm my-4 text-gray-500">Description: {{ item.description }}</p>
             <ul class="list-disc text-gray-600 space-y-1 list-inside">
                 <li>Rooms: {{ item.rooms }}</li>

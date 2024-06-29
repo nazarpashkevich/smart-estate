@@ -6,7 +6,8 @@ export default defineComponent({
     name: "PaginationItem",
     computed: {
         classes() {
-            return this.active ? 'bg-blue-700 text-white' : 'cursor-pointer hover:bg-blue-700 hover:text-white';
+            return this.active ? 'bg-blue-700 text-white' :
+                ' bg-white cursor-pointer hover:bg-blue-700 hover:text-white';
         }
     },
     props: {

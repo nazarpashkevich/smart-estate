@@ -1,8 +1,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { router } from "@inertiajs/vue3";
 
 export default defineComponent({
     name: "SearchForm",
+    methods: {
+        searchAction() {
+            router.visit(route('estate.index'), { data: { filters: { search: this.$refs.searchQuery.value } } })
+        }
+    },
     props: {
         value: {
             type: String,
@@ -23,11 +29,11 @@ export default defineComponent({
                           stroke-width="2"/>
                 </svg>
             </div>
-            <form :action="route('search.index')" method="GET">
-                <input :value="value"
+            <form v-on:submit.prevent="searchAction">
+                <input ref="searchQuery"
+                       :value="value"
                        class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
                     focus:ring-blue-500 focus:border-blue-500"
-                       name="q"
                        placeholder="Your location&preferences&promt"
                        required
                        type="search"

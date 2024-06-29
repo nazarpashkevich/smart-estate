@@ -23,7 +23,6 @@ class RouteServiceProvider extends ServiceProvider
         DashboardRouteRegistrar::class,
         EstateRoutesRegistrar::class,
         HomeRoutesRegistrar::class,
-        SearchRoutesRegistrar::class,
         UserRouteRegistrar::class,
     ];
 
