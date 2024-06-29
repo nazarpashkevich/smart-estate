@@ -21,8 +21,11 @@ class PersonalEstateController
 
     public function index(EstateItemsRequest $request): \Inertia\Response
     {
+        $filters = $request->filters();
+
         return Inertia::render('Personal/Estate/Index', [
-            'items' => EstateItemData::toWrap($this->service->list(sort: $request->sort())),
+            'items'   => EstateItemData::toWrap($this->service->list(filters: $filters, sort: $request->sort())),
+            'filters' => $filters,
         ]);
     }
 

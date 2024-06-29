@@ -6,6 +6,7 @@ use App\Domains\Common\Values\SortValue;
 use App\Domains\Estate\Data\EstateItemData;
 use App\Domains\Estate\Models\EstateItem;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class EstateItemService
 {
@@ -29,9 +30,11 @@ class EstateItemService
     /**
      * @return \Illuminate\Pagination\LengthAwarePaginator<\App\Domains\Estate\Models\EstateItem>
      */
-    public function list(?SortValue $sort = null): LengthAwarePaginator
+    public function list(Collection $filters = new Collection(), ?SortValue $sort = null): LengthAwarePaginator
     {
         $query = EstateItem::query();
+
+        $query->filter($filters);
 
         $sort?->applyTo($query);
 

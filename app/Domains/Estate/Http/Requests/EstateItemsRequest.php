@@ -2,11 +2,13 @@
 
 namespace App\Domains\Estate\Http\Requests;
 
+use App\Domains\Common\Traits\Request\WithFilters;
 use App\Domains\Common\Traits\Request\WithSorting;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EstateItemsRequest extends FormRequest
 {
+    use WithFilters;
     use WithSorting;
 
     /**
@@ -16,6 +18,7 @@ class EstateItemsRequest extends FormRequest
     {
         return [
             ...$this->sortingRules(),
+            ...$this->filtersRules(),
         ];
     }
 }

@@ -1,11 +1,12 @@
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent } from 'vue';
+import { SelectOption } from "@/contracts/base";
 
 export default defineComponent({
     name: 'SelectInput',
     computed: {
         displayValue() {
-            return this.options?.find((option) => option.key === this.modelValue)?.value ?? '';
+            return this.options?.find((option) => option.key == this.modelValue)?.value ?? '';
         }
     },
     data: () => ({
@@ -14,17 +15,27 @@ export default defineComponent({
     props: {
         modelValue: {},
         options: {
-            type: Array as PropType<{ key: string, value: string }[]>,
+            type: Array<SelectOption>,
             required: true
+        },
+        withEmpty: {
+            type: Boolean,
+            default: false
         }
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
-        if (!props.modelValue) {
+        const displayOptions = props.options;
+
+        if (props.withEmpty) {
+            displayOptions.unshift({ key: '', value: '' });
+        } else if (!props.modelValue) {
             emit('update:modelValue', props.options[0].key);
         }
 
-        return {};
+        return {
+            displayOptions
+        };
     }
 });
 </script>
@@ -36,7 +47,7 @@ export default defineComponent({
              class="relative px-4 py-2.5 border shadow-sm border-gray-300 border-gray-300
          focus:border-indigo-500 focus:ring-indigo-500 shadow-sm mt-1 block w-full"
              v-on:click="showDropdown = !showDropdown">
-            <p class="text-sm">{{ displayValue }}</p>
+            <p class="text-sm h-5">{{ displayValue }}</p>
             <span
 
                 :class="showDropdown ? 'rotate-[225deg]' : 'rotate-45'"
@@ -45,10 +56,10 @@ export default defineComponent({
             >
             </span>
             <ul v-if="showDropdown"
-                class="absolute z-[9999] w-full top-full left-0 border border-gray-300 rounded-b-lg bg-white">
-                <template v-for="option in options">
+                class="absolute z-[9999] w-full top-full left-0 border border-gray-300 rounded-b-lg bg-white shadow-md">
+                <template v-for="option in displayOptions">
                     <li
-                        class="w-full py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                        class="w-full py-2 px-4 hover:bg-gray-100 cursor-pointer h-10"
                         v-on:click="() => $emit('update:modelValue', option.key)"
                     >
                         {{ option.value }}

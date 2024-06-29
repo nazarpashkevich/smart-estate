@@ -2,6 +2,10 @@
 
 namespace App\Domains\Estate\Models;
 
+use App\Domains\Common\Traits\Model\InteractWithBuilder;
+use App\Domains\Common\Traits\Model\InteractWithFilter;
+use App\Domains\Estate\Builders\EstateItemBuilder;
+use App\Domains\Estate\Enums\EstateItemFilter;
 use App\Domains\Estate\Enums\EstateItemType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -24,6 +28,12 @@ use Illuminate\Support\Str;
  */
 class EstateItem extends Model
 {
+    use InteractWithBuilder;
+    use InteractWithFilter;
+
+    public string $customBuilder = EstateItemBuilder::class;
+    public string $customFilter = EstateItemFilter::class;
+
     protected $guarded = [];
 
     protected $casts = [

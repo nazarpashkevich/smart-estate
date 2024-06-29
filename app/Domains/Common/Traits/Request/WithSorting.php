@@ -7,13 +7,6 @@ use App\Domains\Common\Values\SortValue;
 trait WithSorting
 {
 
-    public function sortingRules(): array
-    {
-        return [
-            'sort' => ['string'],
-        ];
-    }
-
     public function sort(): ?SortValue
     {
         $sort = $this->str('sort');
@@ -24,5 +17,12 @@ trait WithSorting
         }
 
         return null;
+    }
+
+    protected function sortingRules(): array
+    {
+        return [
+            'sort' => ['string'],
+        ];
     }
 }

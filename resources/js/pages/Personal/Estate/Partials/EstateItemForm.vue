@@ -9,12 +9,24 @@ import { EstateItem } from "@/contracts/estate-item";
 import ImageInput from "@/components/ImageInput.vue";
 import TextArea from "@/components/TextArea.vue";
 import Checkbox from "@/components/Checkbox.vue";
-import { EstateItemType } from "@/enums/estate-item";
+import { BedroomsOptions, EstateItemType, RoomsOptions, YearBuildingOptions } from "@/enums/estate-item";
 import SelectInput from "@/components/SelectInput.vue";
 import MapInput from "@/components/MapInput.vue";
+import { enumToSelectOptions } from "@/helpers/helpers";
 
 export default defineComponent({
     name: "EstateItemForm",
+    computed: {
+        yearBuildingOptions() {
+            return YearBuildingOptions
+        },
+        bedroomsOptions() {
+            return BedroomsOptions
+        },
+        roomsOptions() {
+            return RoomsOptions
+        }
+    },
     components: {
         MapInput,
         SelectInput,
@@ -34,6 +46,7 @@ export default defineComponent({
         }
     },
     methods: {
+        enumToSelectOptions,
         save() {
 
             if (this.item) { // updating
@@ -73,41 +86,10 @@ export default defineComponent({
 
         const types = Object.keys(EstateItemType).map((value: string) => ({ key: EstateItemType[value], value }));
 
-        // create array from 1 to n
-        const maxRooms = 6;
-        const rooms = Array.from(Array(maxRooms).keys()).map((value: number) => {
-                let item = value + 1;
-
-                return { key: item, value: item }
-            }
-        );
-
-        // create array from 1 to n
-        const maxBedrooms = 4;
-        const bedrooms = Array.from(Array(maxBedrooms).keys()).map((value: number) => {
-                let item = value + 1;
-             
-                return { key: item, value: item }
-            }
-        );
-
-        // create array from 1 to n
-        const maxYear = 1960;
-        const countYearOptions = Math.ceil((new Date().getFullYear() - maxYear) / 10);
-        const yearsOfBuild = Array.from(Array(countYearOptions).keys()).map((value: number) => {
-                let item = maxYear + 10 * value;
-
-                return { key: item, value: `${item}'s` }
-            }
-        );
-
         return {
             form,
             user,
-            types,
-            rooms,
-            bedrooms,
-            yearsOfBuild
+            types
         };
     }
 })
@@ -167,7 +149,7 @@ export default defineComponent({
                     <select-input
                         id="rooms"
                         v-model="form.rooms"
-                        :options="rooms"
+                        :options="enumToSelectOptions(roomsOptions)"
                         class="mt-1"
                     />
                     <input-error :message="form.errors.rooms" class="mt-2"/>
@@ -195,7 +177,7 @@ export default defineComponent({
                     <select-input
                         id="bedrooms"
                         v-model="form.bedrooms"
-                        :options="bedrooms"
+                        :options="enumToSelectOptions(bedroomsOptions)"
                         class="mt-1"
                     />
                     <input-error :message="form.errors.bedrooms" class="mt-2"/>
@@ -206,7 +188,7 @@ export default defineComponent({
                     <select-input
                         id="yearOfBuild"
                         v-model="form.yearOfBuild"
-                        :options="yearsOfBuild"
+                        :options="enumToSelectOptions(yearBuildingOptions)"
                         class="mt-1"
                     />
                     <input-error :message="form.errors.yearOfBuild" class="mt-2"/>

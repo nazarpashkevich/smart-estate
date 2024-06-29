@@ -13,3 +13,8 @@ export interface BaseData<T> {
     data: T[],
     meta: PaginationMeta
 }
+
+export interface SelectOption {
+    key: string,
+    value: string,
+}
