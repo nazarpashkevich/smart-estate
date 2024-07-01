@@ -42,6 +42,12 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Estate
                                 </nav-link>
+                                <nav-link
+                                    :active="route().current('personal.application.*')"
+                                    :href="route('personal.application.index')"
+                                >
+                                    Applications
+                                </nav-link>
                             </div>
                         </div>
 

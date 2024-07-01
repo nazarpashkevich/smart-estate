@@ -4,6 +4,11 @@ namespace App\Domains\Estate\Models;
 
 use App\Domains\Common\Casts\MoneyCast;
 use App\Domains\Common\Traits\Model\Arrayable;
+use App\Domains\Common\Traits\Model\InteractWithBuilder;
+use App\Domains\Common\Traits\Model\InteractWithFilter;
+use App\Domains\Estate\Builders\EstateApplicationBuilder;
+use App\Domains\Estate\Data\EstateApplicationData;
+use App\Domains\Estate\Enums\EstateApplicationFilter;
 use App\Domains\Estate\Enums\EstateApplicationStatus;
 use App\Domains\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +25,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class EstateApplication extends Model
 {
     use Arrayable;
+    use InteractWithBuilder;
+    use InteractWithFilter;
+
+    public $customBuilder = EstateApplicationBuilder::class;
+    public $customFilter = EstateApplicationFilter::class;
 
     protected $guarded = [];
 
@@ -31,5 +41,10 @@ class EstateApplication extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function toData(): EstateApplicationData
+    {
+        return EstateApplicationData::from($this->toArray());
     }
 }

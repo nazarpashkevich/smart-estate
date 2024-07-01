@@ -34,7 +34,7 @@ export default defineComponent({
     methods: {
         submit() {
             this.form.post(
-                route('estate.application.store'),
+                route('personal.application.store'),
                 { onSuccess: () => this.submitted = true, preserveScroll: true }
             );
         }
@@ -46,6 +46,7 @@ export default defineComponent({
             name: user.name,
             phone: '',
             suggestedPrice: props.item.price.value,
+            estateItemId: props.item.id,
         });
 
         return { form };

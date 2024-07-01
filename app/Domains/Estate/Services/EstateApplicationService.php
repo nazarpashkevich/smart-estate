@@ -32,12 +32,12 @@ class EstateApplicationService
      */
     public function list(Collection $filters = new Collection(), ?SortValue $sort = null): LengthAwarePaginator
     {
-        $query = EstateApplication::query()->with('location');
+        $query = EstateApplication::query();
 
-        //$query->filter($filters);
+        $query->filter($filters);
 
-        //$sort?->applyTo($query);
+        $sort?->applyTo($query);
 
-        return $query->paginate(2);
+        return $query->paginate();
     }
 }

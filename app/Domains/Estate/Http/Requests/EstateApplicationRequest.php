@@ -4,6 +4,7 @@ namespace App\Domains\Estate\Http\Requests;
 
 use App\Domains\Estate\Data\EstateApplicationData;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Exists;
 
 class EstateApplicationRequest extends FormRequest
 {
@@ -24,6 +25,7 @@ class EstateApplicationRequest extends FormRequest
             'name'           => ['string', 'required'],
             'phone'          => ['string', 'required'],
             'suggestedPrice' => ['numeric', 'min:1', 'required'],
+            'estateItemId'   => ['numeric', 'required', new Exists('estate_items', 'id')],
         ];
     }
 

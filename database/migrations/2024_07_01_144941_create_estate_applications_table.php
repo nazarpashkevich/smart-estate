@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('estate_applications', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Domains\User\Models\User::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(\App\Domains\Estate\Models\EstateItem::class)->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('phone');
             $table->float('suggested_price');

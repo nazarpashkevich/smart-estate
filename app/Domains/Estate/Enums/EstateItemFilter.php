@@ -3,12 +3,12 @@
 namespace App\Domains\Estate\Enums;
 
 use App\Domains\Common\Filters\Filter;
-use App\Domains\Estate\Filters\BedroomsFilter;
+use App\Domains\Estate\Filters\EstateItem\BedroomsFilter;
+use App\Domains\Estate\Filters\EstateItem\PriceFromFilter;
+use App\Domains\Estate\Filters\EstateItem\PriceToFilter;
+use App\Domains\Estate\Filters\EstateItem\RoomsFilter;
+use App\Domains\Estate\Filters\EstateItem\YearOfBuildFilter;
 use App\Domains\Estate\Filters\PriceFilter;
-use App\Domains\Estate\Filters\PriceFromFilter;
-use App\Domains\Estate\Filters\PriceToFilter;
-use App\Domains\Estate\Filters\RoomsFilter;
-use App\Domains\Estate\Filters\YearOfBuildFilter;
 use App\Domains\Recipe\Filters\Recipe\AllergyFilter;
 use App\Domains\Recipe\Filters\Recipe\CategoryFilter;
 use App\Domains\Recipe\Filters\Recipe\CuisineFilter;

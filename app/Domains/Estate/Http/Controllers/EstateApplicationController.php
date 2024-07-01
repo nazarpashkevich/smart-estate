@@ -4,6 +4,8 @@ namespace App\Domains\Estate\Http\Controllers;
 
 use App\Domains\Estate\Data\EstateApplicationData;
 use App\Domains\Estate\Http\Requests\EstateApplicationRequest;
+use App\Domains\Estate\Http\Requests\EstateApplicationsRequest;
+use App\Domains\Estate\Http\Requests\UpdateEstateApplicationStatusRequest;
 use App\Domains\Estate\Models\EstateApplication;
 use App\Domains\Estate\Services\EstateApplicationService;
 use F9Web\ApiResponseHelpers;
@@ -19,11 +21,12 @@ class EstateApplicationController
     }
 
 
-    public function index($request): \Inertia\Response
+    public function index(EstateApplicationsRequest $request): \Inertia\Response
     {
         // @todo
-        return Inertia::render('Estate/Index', [
-            'items' => EstateApplicationData::toWrap($this->service->list()),
+        return Inertia::render('Personal/Applications/Index', [
+            'items'   => EstateApplicationData::toWrap($this->service->list($request->filters(), $request->sort())),
+            'filters' => $request->filters(),
         ]);
     }
 
@@ -41,5 +44,17 @@ class EstateApplicationController
         $this->service->create($request->toData());
 
         return back();
+    }
+
+    public function updateStatus(
+        EstateApplication $estateApplication,
+        UpdateEstateApplicationStatusRequest $request
+    ): RedirectResponse {
+        $data = $estateApplication->toData();
+        $data->status = $request->status();
+
+        $this->service->update($estateApplication, $data);
+
+        return redirect(route('personal.application.index'));
     }
 }

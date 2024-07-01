@@ -44,7 +44,7 @@ export default defineComponent({
     <div class="">
         <div v-click-outside="() => showDropdown ? showDropdown = false : null"
              :class="`rounded${showDropdown ? '-t' : ''}-md`"
-             class="relative px-4 py-2.5 border shadow-sm border-gray-300 border-gray-300
+             class="relative px-4 py-2.5 pr-10 min-w-32 border shadow-sm border-gray-300 border-gray-300
          focus:border-indigo-500 focus:ring-indigo-500 shadow-sm mt-1 block w-full"
              v-on:click="showDropdown = !showDropdown">
             <p class="text-sm h-5">{{ displayValue }}</p>

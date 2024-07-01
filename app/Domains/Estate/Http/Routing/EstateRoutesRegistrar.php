@@ -15,20 +15,32 @@ class EstateRoutesRegistrar extends RouteRegistrar
     public function map(Registrar $route): void
     {
         // personal user routes
-        $route->group([
-            'prefix'     => 'personal/estate',
-            'controller' => PersonalEstateController::class,
-            'middleware' => 'auth',
-            'as'         => 'personal.estate.',
-        ], static function (Registrar $route) {
-            $route->get('', 'index')->name('index');
-            $route->get('create', 'create')->name('create');
-            $route->get('{estateItem}', 'edit')->name('edit');
+        $route->group(
+            ['prefix' => 'personal', 'middleware' => 'auth', 'as' => 'personal.'],
+            static function (Registrar $route) {
+                $route->group(
+                    ['prefix' => 'estate', 'controller' => PersonalEstateController::class, 'as' => 'estate.',],
+                    static function (Registrar $route) {
+                        $route->get('', 'index')->name('index');
+                        $route->get('create', 'create')->name('create');
+                        $route->get('{estateItem}', 'edit')->name('edit');
 
-            // api
-            $route->post('', 'store')->name('store');
-            $route->put('{estateItem}', 'update')->name('update');
-        });
+                        // api
+                        $route->post('', 'store')->name('store');
+                        $route->put('{estateItem}', 'update')->name('update');
+                    }
+                );
+
+                $route->group([
+                    'prefix' => 'application', 'controller' => EstateApplicationController::class,
+                    'as'     => 'application.',
+                ], static function (Registrar $route) {
+                    $route->get('', 'index')->name('index');
+                    $route->post('', 'store')->name('store');
+                    $route->put('{estateApplication}/status', 'updateStatus')->name('update-status');
+                });
+            }
+        );
 
         $route->group([
             'prefix'     => 'estate',
@@ -37,14 +49,6 @@ class EstateRoutesRegistrar extends RouteRegistrar
         ], static function (Registrar $route) {
             $route->get('', 'index')->name('index');
             $route->get('{estateItem}', 'show')->name('show');
-        });
-
-        $route->group([
-            'prefix'     => 'estate',
-            'controller' => EstateApplicationController::class,
-            'as'         => 'estate.application.',
-        ], static function (Registrar $route) {
-            $route->post('', 'store')->name('store');
         });
     }
 }

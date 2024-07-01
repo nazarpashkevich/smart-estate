@@ -7,7 +7,8 @@ export function enumToSelectOptions(enumItem: any): SelectOption {
 
     const result: SelectOption[] = [];
     for (const key in enumItem) {
-        result.push({ key: key, value: enumItem[key] });
+        const value = enumItem[key];
+        result.push({ key: value, value: key });
     }
 
     return result;

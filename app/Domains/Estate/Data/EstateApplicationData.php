@@ -18,6 +18,7 @@ class EstateApplicationData extends BaseData
     public function __construct(
         public string $name,
         public string $phone,
+        public int $estateItemId,
         #[WithTransformer(PriceTransformer::class)]
         #[WithCast(PriceCast::class)]
         public Money $suggestedPrice,
@@ -39,6 +40,7 @@ class EstateApplicationData extends BaseData
             'phone'           => $this->phone,
             'suggested_price' => $this->suggestedPrice,
             'status'          => $this->status,
+            'estate_item_id'  => $this->estateItemId,
         ]);
 
         if (!$application->id && Auth::id()) {
