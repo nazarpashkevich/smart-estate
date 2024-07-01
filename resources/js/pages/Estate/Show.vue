@@ -4,11 +4,14 @@ import MainLayout from "@/layouts/MainLayout.vue";
 import { EstateItem } from "@/contracts/estate-item";
 import PrimaryButton from "@/components/PrimaryButton.vue";
 import MapSection from "@/components/Common/MapSection.vue";
+import BuyForm from "@/pages/Estate/Partials/BuyForm.vue";
 
 export default defineComponent({
     name: "Show",
-    components: { MapSection, PrimaryButton, MainLayout },
-    data: () => ({}),
+    components: { BuyForm, MapSection, PrimaryButton, MainLayout },
+    data: () => ({
+        showBuyForm: false
+    }),
     props: {
         item: {
             type: Object as EstateItem,
@@ -19,7 +22,7 @@ export default defineComponent({
 
 <template>
     <MainLayout>
-        <div class="gap-12 py-8 px-20">
+        <div class="gap-12 py-8 px-8 md:px-20">
             <div class="bg-white px-8 py-5 rounded-md shadow-md">
                 <div class="flex gap-12 mb-12">
                     <div class="w-2/3">
@@ -27,14 +30,16 @@ export default defineComponent({
                     </div>
                     <div class="bg-blue-500 w-1/3"></div>
                 </div>
-                <h1 class="text-4xl font-bold mb-4">Title for selling</h1>
+                <h1 class="text-4xl font-bold mb-4">{{ item.title }}</h1>
                 <div class="px-4">
-                    <div class="flex gap-8 items-center mb-6">
-                        <p class="font-semibold text-3xl">{{ item.price }}.00$</p>
+                    <div class="flex gap-8 items-center mb-6 flex-col sm:flex-row">
+                        <p class="font-semibold text-3xl">{{ item.price.format }}</p>
                         <span class="text-sm text-gray-500"> some additional text here</span>
-                        <primary-button class="ml-auto" size="large">Buy</primary-button>
+                        <primary-button class="ml-auto" size="large" v-on:click="showBuyForm = true">
+                            Buy
+                        </primary-button>
                     </div>
-                    <div class="flex gap-4 mb-6">
+                    <div class="flex gap-4 mb-6 flex-col sm:flex-row">
                         <span class="text-md text-gray-700">· Square: {{ item.square }} m2</span>
                         <span class="text-md text-gray-700">· Rooms: {{ item.rooms }}</span>
                         <span class="text-md text-gray-700">· Bedrooms: {{ item.bedrooms }}</span>
@@ -56,5 +61,6 @@ export default defineComponent({
                 </div>
             </div>
         </div>
+        <buy-form v-if="showBuyForm" :item="item" @close="showBuyForm = false"/>
     </MainLayout>
 </template>

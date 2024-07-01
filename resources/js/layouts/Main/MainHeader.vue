@@ -53,7 +53,7 @@ export default defineComponent({
                     class="ml-auto px-6 my-auto cursor-pointer text-white hover:text-gray-200">
                     Login
                 </Link>
-                <div v-else class="ml-auto">
+                <div v-else class="ml-auto hidden sm:block">
                     <dropdown align="right" width="48">
                         <template #trigger>
                             <span class="">

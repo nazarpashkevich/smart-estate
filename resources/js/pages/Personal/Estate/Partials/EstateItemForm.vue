@@ -81,7 +81,7 @@ export default defineComponent({
             hasParking: props.item?.hasParking ?? false,
             lat: props.item?.location?.lat ?? null,
             lng: props.item?.location?.lng ?? null,
-            price: props.item?.price ?? null,
+            price: props.item?.price.value ?? null,
             features: props.item?.features ?? [],
         });
 

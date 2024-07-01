@@ -33,7 +33,7 @@ class EstateController
         $estateItem->load('location');
 
         return Inertia::render('Estate/Show', [
-            'item' => $estateItem,
+            'item' => EstateItemData::from($estateItem),
         ]);
     }
 }

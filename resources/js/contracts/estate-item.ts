@@ -3,6 +3,7 @@ import { Location } from "@/contracts/location";
 
 export interface EstateItem {
     id: number,
+    title: string,
     preview: string,
     description: string,
     rooms: number,
@@ -13,6 +14,9 @@ export interface EstateItem {
     bedrooms: number,
     hasParking: boolean,
     location: Location,
-    price: number,
+    price: {
+        value: number,
+        format: string
+    },
     features: string[],
 }

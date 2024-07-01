@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "akaunting/laravel-money": "^5.2",
         "f9webltd/laravel-api-response-helpers": "^2.0",
         "inertiajs/inertia-laravel": "^1.0",
         "laravel/framework": "^11.0",

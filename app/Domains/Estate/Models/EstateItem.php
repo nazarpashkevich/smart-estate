@@ -2,6 +2,8 @@
 
 namespace App\Domains\Estate\Models;
 
+use App\Domains\Common\Casts\MoneyCast;
+use App\Domains\Common\Traits\Model\Arrayable;
 use App\Domains\Common\Traits\Model\InteractWithBuilder;
 use App\Domains\Common\Traits\Model\InteractWithFilter;
 use App\Domains\Estate\Builders\EstateItemBuilder;
@@ -10,7 +12,6 @@ use App\Domains\Estate\Enums\EstateItemType;
 use App\Domains\Location\Models\Location;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str;
 
 /**
  * @property int                                      $id
@@ -22,7 +23,7 @@ use Illuminate\Support\Str;
  * @property int                                      $year_of_build
  * @property float                                    $square
  * @property int                                      $bedrooms
- * @property bool                                     $hasParking
+ * @property bool                                     $has_parking
  * @property float                                    $lat
  * @property float                                    $lng
  * @property float                                    $price
@@ -30,6 +31,7 @@ use Illuminate\Support\Str;
  */
 class EstateItem extends Model
 {
+    use Arrayable;
     use InteractWithBuilder;
     use InteractWithFilter;
 
@@ -39,17 +41,11 @@ class EstateItem extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'type'       => EstateItemType::class,
-        'hasParking' => 'bool',
-        'features'   => 'json',
+        'type'        => EstateItemType::class,
+        'has_parking' => 'bool',
+        'features'    => 'json',
+        'price'       => MoneyCast::class,
     ];
-
-    public function toArray(): array
-    {
-        $item = parent::toArray();
-
-        return array_combine(array_map([Str::class, 'camel'], array_keys($item)), array_values($item));
-    }
 
     public function location(): BelongsTo
     {
