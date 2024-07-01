@@ -7,7 +7,9 @@ use App\Domains\Common\Traits\Model\InteractWithFilter;
 use App\Domains\Estate\Builders\EstateItemBuilder;
 use App\Domains\Estate\Enums\EstateItemFilter;
 use App\Domains\Estate\Enums\EstateItemType;
+use App\Domains\Location\Models\Location;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 /**
@@ -47,5 +49,10 @@ class EstateItem extends Model
         $item = parent::toArray();
 
         return array_combine(array_map([Str::class, 'camel'], array_keys($item)), array_values($item));
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
     }
 }

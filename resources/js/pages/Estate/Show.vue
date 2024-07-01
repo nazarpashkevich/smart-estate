@@ -51,7 +51,7 @@ export default defineComponent({
                     </div>
                     <div class="">
                         <h2 class="text-2xl font-semibold mb-4">Location</h2>
-                        <map-section :lat="item.lat" :lng="item.lng"/>
+                        <map-section :lat="item.location.lat" :lng="item.location.lng" :zoom="15"/>
                     </div>
                 </div>
             </div>

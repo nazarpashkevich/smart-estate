@@ -30,6 +30,8 @@ class EstateController
 
     public function show(EstateItem $estateItem): \Inertia\Response
     {
+        $estateItem->load('location');
+
         return Inertia::render('Estate/Show', [
             'item' => $estateItem,
         ]);

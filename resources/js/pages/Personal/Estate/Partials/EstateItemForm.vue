@@ -66,6 +66,7 @@ export default defineComponent({
         }
     },
     setup(props) {
+        console.log(props);
         const user = usePage().props.auth.user;
 
         const form = useForm({
@@ -78,8 +79,8 @@ export default defineComponent({
             square: props.item?.square ?? 0,
             bedrooms: props.item?.bedrooms ?? 1,
             hasParking: props.item?.hasParking ?? false,
-            lat: props.item?.lat ?? null,
-            lng: props.item?.lng ?? null,
+            lat: props.item?.location?.lat ?? null,
+            lng: props.item?.location?.lng ?? null,
             price: props.item?.price ?? null,
             features: props.item?.features ?? [],
         });

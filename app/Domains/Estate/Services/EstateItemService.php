@@ -32,7 +32,7 @@ class EstateItemService
      */
     public function list(Collection $filters = new Collection(), ?SortValue $sort = null): LengthAwarePaginator
     {
-        $query = EstateItem::query();
+        $query = EstateItem::query()->with('location');
 
         $query->filter($filters);
 

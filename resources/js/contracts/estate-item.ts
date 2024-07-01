@@ -1,4 +1,5 @@
 import { EstateItemType } from "@/enums/estate-item";
+import { Location } from "@/contracts/location";
 
 export interface EstateItem {
     id: number,
@@ -11,8 +12,7 @@ export interface EstateItem {
     square: number,
     bedrooms: number,
     hasParking: boolean,
-    lat: Number,
-    lng: Number,
+    location: Location,
     price: number,
     features: string[],
 }

@@ -43,6 +43,8 @@ class PersonalEstateController
 
     public function edit(EstateItem $estateItem): \Inertia\Response
     {
+        $estateItem->load('location');
+        
         return Inertia::render('Personal/Estate/Edit', ['item' => EstateItemData::from($estateItem)->toArray()]);
     }
 

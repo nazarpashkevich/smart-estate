@@ -5,6 +5,7 @@ namespace App\Domains\Estate\Http\Requests;
 use App\Domains\Common\Actions\SaveFileAction;
 use App\Domains\Estate\Data\EstateItemData;
 use App\Domains\Estate\Enums\EstateItemType;
+use App\Domains\Location\Data\LocationData;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -48,6 +49,10 @@ class EstateItemRequest extends FormRequest
             $preview = app(SaveFileAction::class)->handle($this->file('preview'));
         }
 
-        return EstateItemData::from([...$this->all(), 'preview' => $preview]);
+        return EstateItemData::from([
+            ...$this->all(),
+            'preview'  => $preview,
+            'location' => LocationData::from(['lat' => $this->float('lat'), 'lng' => $this->float('lng')]),
+        ]);
     }
 }

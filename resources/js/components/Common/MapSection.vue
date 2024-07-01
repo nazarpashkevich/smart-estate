@@ -18,15 +18,19 @@ export default defineComponent({
             type: Number,
             required: true
         },
+        zoom: {
+            type: Number,
+            default: 6
+        },
     },
     mounted() {
-        this.map = L.map('map').setView([this.lat, this.lng], 6);
+        this.map = L.map('map').setView([this.lat, this.lng], this.zoom);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(this.map);
 
-        L.marker([this.lat, this.lng]).addTo(this.map)
+        L.marker([this.lat, this.lng]).addTo(this.map);
     },
 
 });

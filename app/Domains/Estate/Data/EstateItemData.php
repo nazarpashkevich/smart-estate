@@ -5,6 +5,7 @@ namespace App\Domains\Estate\Data;
 use App\Domains\Common\Data\BaseData;
 use App\Domains\Estate\Enums\EstateItemType;
 use App\Domains\Estate\Models\EstateItem;
+use App\Domains\Location\Data\LocationData;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\EnumCast;
 
@@ -17,9 +18,8 @@ class EstateItemData extends BaseData
         public int $yearOfBuild,
         public float $square,
         public float $price,
+        public LocationData $location,
         public ?string $preview = null,
-        public ?float $lat = null,
-        public ?float $lng = null,
         public int $rooms = 1,
         public int $floor = 1,
         public int $bedrooms = 1,
@@ -43,14 +43,14 @@ class EstateItemData extends BaseData
             'year_of_build' => $this->yearOfBuild,
             'square'        => $this->square,
             'price'         => $this->price,
-            'lat'           => $this->lat,
-            'lng'           => $this->lng,
             'rooms'         => $this->rooms,
             'floor'         => $this->floor,
             'bedrooms'      => $this->bedrooms,
             'has_parking'   => $this->hasParking,
             'features'      => $this->features,
+            'location_id'   => $this->location->toModel()->id,
         ]);
+
 
         return $estateItem;
     }
