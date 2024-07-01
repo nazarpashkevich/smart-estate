@@ -13,8 +13,10 @@ export default defineComponent({
     <div class="min-h-screen flex flex-col">
         <main-header/>
         <main class="flex-1">
-            <div class="bg-gray-100">
-                <slot/>
+            <div class="bg-gray-100 flex">
+                <div class="container mx-auto">
+                    <slot/>
+                </div>
             </div>
         </main>
         <main-footer/>

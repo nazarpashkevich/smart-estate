@@ -17,13 +17,6 @@ class EstateController
     {
     }
 
-    public function show(EstateItem $estateItem): \Inertia\Response
-    {
-        return Inertia::render('Personal/Estate/Index', [
-
-        ]);
-    }
-
 
     public function index(EstateItemsRequest $request): \Inertia\Response
     {
@@ -32,6 +25,13 @@ class EstateController
         return Inertia::render('Estate/Index', [
             'items'   => EstateItemData::toWrap($this->service->list(filters: $filters, sort: $request->sort())),
             'filters' => $filters,
+        ]);
+    }
+
+    public function show(EstateItem $estateItem): \Inertia\Response
+    {
+        return Inertia::render('Estate/Show', [
+            'item' => $estateItem,
         ]);
     }
 }

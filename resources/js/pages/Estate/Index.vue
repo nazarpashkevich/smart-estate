@@ -14,7 +14,7 @@ export default defineComponent({
     data: () => ({}),
     props: {
         filters: {
-            type: Array,
+            type: Object,
         },
         items: {
             type: Object as BaseData<EstateItem>,
