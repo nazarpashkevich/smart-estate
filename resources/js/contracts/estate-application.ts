@@ -10,4 +10,5 @@ export interface EstateApplication {
     },
     status: EstateApplicationStatus,
     estateItemId: number,
+    createdAt: Date,
 }

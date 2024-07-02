@@ -20,6 +20,13 @@ export default defineComponent({
             type: String,
             required: true
         },
+    },
+    setup() {
+        const params = new URLSearchParams(window.location.search);
+
+        const currentSort = params.get('sort');
+
+        return { currentSort };
     }
 })
 </script>
@@ -51,7 +58,11 @@ export default defineComponent({
 
         <template #content>
             <template v-for="option in options">
-                <dropdown-link :href="route(path, {sort: option.key})">{{ option.name }}</dropdown-link>
+                <dropdown-link
+                    :class="currentSort === option.key ? 'bg-gray-100' : ''"
+                    :href="route(path, {sort: option.key})">
+                    {{ option.name }}
+                </dropdown-link>
             </template>
         </template>
     </dropdown>

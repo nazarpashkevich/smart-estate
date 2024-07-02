@@ -6,6 +6,7 @@ import DangerButton from "@/components/DangerButton.vue";
 import SecondaryButton from "@/components/SecondaryButton.vue";
 import { EstateApplicationStatus } from "@/enums/estate-application";
 import { useForm } from "@inertiajs/vue3";
+import moment from "moment";
 
 export default defineComponent({
     name: "ApplicationList",
@@ -41,7 +42,7 @@ export default defineComponent({
             status: null
         });
 
-        return { form };
+        return { form, moment };
     }
 })
 </script>
@@ -55,6 +56,7 @@ export default defineComponent({
             <tr>
                 <th class="px-6 pl-24 py-3" scope="col">#</th>
                 <th class="px-6 py-3" scope="col">Apartment</th>
+                <th class="px-6 py-3" scope="col">Created</th>
                 <th class="px-6 py-3" scope="col">Client name</th>
                 <th class="px-6 py-3" scope="col">Client phone</th>
                 <th class="px-6 py-3" scope="col">Suggested price</th>
@@ -70,6 +72,7 @@ export default defineComponent({
                     <td class="px-6 py-4">
                         <Link :href="route('estate.show', item.estateItemId)" class="underline">Apartment</Link>
                     </td>
+                    <td class="px-6 py-4">{{ moment(item.createdAt).format('LLL') }}</td>
                     <td class="px-6 py-4">{{ item.name }}</td>
                     <td class="px-6 py-4">{{ item.phone }}</td>
                     <td class="px-6 py-4">{{ item.suggestedPrice?.format }}</td>
@@ -79,7 +82,7 @@ export default defineComponent({
                             {{ item.status }}
                         </span>
                     </td>
-                    <td class="px-6 pr-24 py-4 text-right flex w-full space-around">
+                    <td class="px-6 pr-24 py-4 text-right flex w-full space-around gap-4">
                         <template v-if="item.status === EstateApplicationStatus.New">
                             <secondary-button
                                 class="mx-auto"

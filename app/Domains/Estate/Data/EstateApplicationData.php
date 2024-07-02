@@ -8,6 +8,7 @@ use App\Domains\Common\Data\Casts\PriceCast;
 use App\Domains\Common\Data\Transformers\PriceTransformer;
 use App\Domains\Estate\Enums\EstateApplicationStatus;
 use App\Domains\Estate\Models\EstateApplication;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Attributes\WithTransformer;
@@ -25,6 +26,7 @@ class EstateApplicationData extends BaseData
         #[WithCast(EnumCast::class)]
         public EstateApplicationStatus $status = EstateApplicationStatus::New,
         public ?int $id = null,
+        public ?CarbonInterface $createdAt = null,
     ) {
     }
 

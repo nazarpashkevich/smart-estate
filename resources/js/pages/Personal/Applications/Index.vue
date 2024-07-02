@@ -40,11 +40,11 @@ export default defineComponent({
     data: () => ({
         sortOptions: [
             {
-                key: 'created:desc',
+                key: 'created_at',
                 name: 'Created (newest first)'
             },
             {
-                key: 'created',
+                key: 'created_at:desc',
                 name: 'Created (older first)'
             },
         ],
@@ -92,7 +92,7 @@ export default defineComponent({
                             :options="statuses"
                             @update:model-value="onUpdateStatus"
                         ></select-input>
-                        <sort :options="sortOptions" class="ml-auto" path="personal.estate.index"></sort>
+                        <sort :options="sortOptions" class="ml-auto" path="personal.application.index"></sort>
                     </div>
                     <div class="min-h-24">
                         <application-list v-if="items.meta.total > 0" :items="items.data"/>
