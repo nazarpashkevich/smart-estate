@@ -10,6 +10,7 @@ use App\Domains\Estate\Builders\EstateItemBuilder;
 use App\Domains\Estate\Enums\EstateItemFilter;
 use App\Domains\Estate\Enums\EstateItemType;
 use App\Domains\Location\Models\Location;
+use App\Domains\Search\Contracts\Model\ElasticSearchable;
 use App\Domains\Search\Traits\Model\Searchable;
 use Database\Factories\EstateItemFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,13 +37,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @method static \App\Domains\Estate\Builders\EstateItemBuilder query()
  */
-class EstateItem extends Model
+class EstateItem extends Model implements ElasticSearchable
 {
     use Arrayable;
     use Searchable;
     use InteractWithBuilder;
     use InteractWithFilter;
     use HasFactory;
+
 
     public string $customBuilder = EstateItemBuilder::class;
     public string $customFilter = EstateItemFilter::class;

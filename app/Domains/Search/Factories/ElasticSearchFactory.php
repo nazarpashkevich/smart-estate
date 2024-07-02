@@ -4,7 +4,7 @@ namespace App\Domains\Search\Factories;
 
 use App\Domains\Common\Filters\Filter;
 use App\Domains\Common\Values\SortValue;
-use App\Domains\Search\Contracts\ElasticSearchFilterable;
+use App\Domains\Search\Contracts\Filter\ElasticSearchFilterable;
 use Elastic\Elasticsearch\Client;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -77,7 +77,7 @@ class ElasticSearchFactory
 
         $items = $this->get();
 
-        $hits = $items?->hits;
+        $hits = $items->hits;
 
         return new LengthAwarePaginator(
             Arr::map($hits?->hits ?? [], fn ($hit) => $hit->_id),

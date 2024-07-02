@@ -165,6 +165,7 @@ export default defineComponent({
                         autofocus
                         class="mt-1 block w-full"
                         required
+                        step="0.01"
                         type="number"
                     />
                     <input-error :message="form.errors.square" class="mt-2"/>

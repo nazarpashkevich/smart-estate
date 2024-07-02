@@ -67,7 +67,7 @@ class EstateItemData extends BaseData
     public function with(): array
     {
         return [
-            'title'           => $this->location?->name,
+            'title'           => $this->location->name,
             'price_formatted' => $this->price->format(),
         ];
     }

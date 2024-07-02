@@ -31,12 +31,12 @@ class ReindexCommand extends Command
 
         foreach (self::INDEXABLE_MODELS as $model) {
             /**
-             * @var \App\Domains\Search\Traits\Model\Searchable $item
+             * @var \App\Domains\Search\Contracts\Model\ElasticSearchable $item
              */
             foreach ($model::cursor() as $item) {
                 $item->elasticsearchIndex();
 
-                $this->comment("Indexed {$model}::{$item->id}");
+                $this->comment("Indexed {$model}::{$item->getQueueableId()}");
             }
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Search\Contracts;
+namespace App\Domains\Search\Contracts\Filter;
 
 interface ElasticSearchFilterable
 {

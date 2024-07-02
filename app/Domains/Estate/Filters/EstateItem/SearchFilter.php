@@ -3,7 +3,7 @@
 namespace App\Domains\Estate\Filters\EstateItem;
 
 use App\Domains\Common\Filters\Filter;
-use App\Domains\Search\Contracts\ElasticSearchFilterable;
+use App\Domains\Search\Contracts\Filter\ElasticSearchFilterable;
 use Illuminate\Database\Eloquent\Builder;
 
 class SearchFilter extends Filter implements ElasticSearchFilterable
