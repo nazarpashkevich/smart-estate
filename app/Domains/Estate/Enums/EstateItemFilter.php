@@ -7,14 +7,9 @@ use App\Domains\Estate\Filters\EstateItem\BedroomsFilter;
 use App\Domains\Estate\Filters\EstateItem\PriceFromFilter;
 use App\Domains\Estate\Filters\EstateItem\PriceToFilter;
 use App\Domains\Estate\Filters\EstateItem\RoomsFilter;
+use App\Domains\Estate\Filters\EstateItem\SearchFilter;
+use App\Domains\Estate\Filters\EstateItem\UserFilter;
 use App\Domains\Estate\Filters\EstateItem\YearOfBuildFilter;
-use App\Domains\Estate\Filters\PriceFilter;
-use App\Domains\Recipe\Filters\Recipe\AllergyFilter;
-use App\Domains\Recipe\Filters\Recipe\CategoryFilter;
-use App\Domains\Recipe\Filters\Recipe\CuisineFilter;
-use App\Domains\Recipe\Filters\Recipe\DietFilter;
-use App\Domains\Recipe\Filters\Recipe\MealTypeFilter;
-use App\Domains\Recipe\Filters\Recipe\SearchFilter;
 
 enum EstateItemFilter: string
 {
@@ -23,6 +18,8 @@ enum EstateItemFilter: string
     case Rooms = 'rooms';
     case Bedrooms = 'bedrooms';
     case YearOfBuild = 'yearOfBuild';
+    case Search = 'search';
+    case User = 'user';
 
     public function createFilter(mixed $value): Filter
     {
@@ -32,6 +29,8 @@ enum EstateItemFilter: string
             self::Rooms       => new RoomsFilter($value),
             self::Bedrooms    => new BedroomsFilter($value),
             self::YearOfBuild => new YearOfBuildFilter($value),
+            self::Search      => new SearchFilter($value),
+            self::User        => new UserFilter($value),
         };
     }
 }

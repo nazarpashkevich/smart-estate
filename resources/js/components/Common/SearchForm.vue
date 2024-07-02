@@ -35,7 +35,6 @@ export default defineComponent({
                        class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
                     focus:ring-blue-500 focus:border-blue-500"
                        placeholder="Your location&preferences&promt"
-                       required
                        type="search"
                 />
                 <button class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4

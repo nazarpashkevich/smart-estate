@@ -2,6 +2,8 @@
 
 namespace App\Domains\Location\Models;
 
+use Database\Factories\LocationFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,10 +18,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Location extends Model
 {
+    use HasFactory;
+
     protected $guarded = [];
 
     protected $casts = [
-        'boundingbox' => 'json',
+        'boundingbox' => 'array',
         'address'     => 'json',
     ];
+
+    protected static function newFactory(): LocationFactory|\Illuminate\Database\Eloquent\Factories\Factory
+    {
+        return LocationFactory::new();
+    }
 }

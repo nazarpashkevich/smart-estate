@@ -9,6 +9,7 @@ use App\Domains\Common\Data\Transformers\PriceTransformer;
 use App\Domains\Estate\Enums\EstateItemType;
 use App\Domains\Estate\Models\EstateItem;
 use App\Domains\Location\Data\LocationData;
+use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Attributes\WithTransformer;
 use Spatie\LaravelData\Casts\EnumCast;
@@ -55,6 +56,7 @@ class EstateItemData extends BaseData
             'has_parking'   => $this->hasParking,
             'features'      => $this->features,
             'location_id'   => $this->location->toModel()->id,
+            'user_id'       => Auth::id(),
         ]);
 
 

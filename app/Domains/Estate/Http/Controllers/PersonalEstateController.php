@@ -9,6 +9,7 @@ use App\Domains\Estate\Models\EstateItem;
 use App\Domains\Estate\Services\EstateItemService;
 use F9Web\ApiResponseHelpers;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class PersonalEstateController
@@ -22,6 +23,9 @@ class PersonalEstateController
     public function index(EstateItemsRequest $request): \Inertia\Response
     {
         $filters = $request->filters();
+
+        // only for current user
+        $filters['user'] = Auth::id();
 
         return Inertia::render('Personal/Estate/Index', [
             'items'   => EstateItemData::toWrap($this->service->list(filters: $filters, sort: $request->sort())),
@@ -44,7 +48,7 @@ class PersonalEstateController
     public function edit(EstateItem $estateItem): \Inertia\Response
     {
         $estateItem->load('location');
-        
+
         return Inertia::render('Personal/Estate/Edit', ['item' => EstateItemData::from($estateItem)->toArray()]);
     }
 

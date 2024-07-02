@@ -1,18 +1,23 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link, router, usePage } from "@inertiajs/vue3";
 import DropdownLink from "@/components/DropdownLink.vue";
 import Dropdown from "@/components/Dropdown.vue";
 import ApplicationLogo from "@/components/ApplicationLogo.vue";
 
 export default defineComponent({
     name: "MainHeader",
+    methods: {
+        router() {
+            return router
+        }
+    },
     components: { ApplicationLogo, Dropdown, DropdownLink, Link },
     data: () => ({
         items: [
             {
-                name: "Home",
-                link: "/"
+                name: "Estate",
+                link: route('estate.index')
             },
             {
                 name: "Not Home",
@@ -35,7 +40,7 @@ export default defineComponent({
         class="w-full border-slate-50/40 border-b bg-cover bg-[url('https://ssl.cdn-redfin.com/v525.2.0/images/homepage/banners/genHomepageDesktopBanner/HPTO_2120-NW-97th-St-Seattle_PremierHP.jpg')]">
         <div class="backdrop-blur-sm bg-black/1 5">
             <div class="max-w-7xl mx-auto flex gap-6 py-4">
-                <ApplicationLogo/>
+                <ApplicationLogo class="cursor-pointer" v-on:click="router().visit(route('home'))"/>
                 <template v-for="(item, index) in items">
                     <Link
                         :class="{'border-r': index !== items.length - 1}"

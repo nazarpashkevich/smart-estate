@@ -18,6 +18,10 @@ class EstateController
     }
 
 
+    /**
+     * @throws \Elastic\Elasticsearch\Exception\ServerResponseException
+     * @throws \Elastic\Elasticsearch\Exception\ClientResponseException
+     */
     public function index(EstateItemsRequest $request): \Inertia\Response
     {
         $filters = $request->filters();

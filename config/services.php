@@ -40,4 +40,8 @@ return [
         'base-url' => env('GEOCODE_BASE_URL'),
     ],
 
+    'search' => [
+        'hosts'   => explode(',', env('ELASTICSEARCH_HOSTS')),
+        'enabled' => env('ELASTICSEARCH_ENABLED', true),
+    ],
 ];

@@ -12,9 +12,7 @@ class AbstractQueryBuilder extends Builder
     public function filter(?Collection $filters = null): self
     {
         if ($filters->count()) {
-            $filters = Arr::whereNotNull($filters->map(
-                fn (mixed $value, mixed $name) => static::getModel()->getFilter()::tryFrom($name)?->createFilter($value)
-            )->values()->toArray());
+            $filters = $this->resolveFilters($filters);
 
             app(Pipeline::class)
                 ->send($this)
@@ -23,5 +21,12 @@ class AbstractQueryBuilder extends Builder
         }
 
         return $this;
+    }
+
+    public function resolveFilters(?Collection $filters = null): array
+    {
+        return Arr::whereNotNull($filters->map(
+            fn (mixed $value, mixed $name) => static::getModel()->getFilter()::tryFrom($name)?->createFilter($value)
+        )->values()->toArray());
     }
 }
