@@ -74,7 +74,14 @@ export default defineComponent({
                     </td>
                     <td class="px-6 py-4">{{ moment(item.createdAt).format('LLL') }}</td>
                     <td class="px-6 py-4">{{ item.name }}</td>
-                    <td class="px-6 py-4">{{ item.phone }}</td>
+                    <td class="px-6 py-4">
+                        <template v-if="item.status === EstateApplicationStatus.Approved">
+                            {{ item.phone }}
+                        </template>
+                        <span v-else class="blur-sm">
+                            000 000
+                        </span>
+                    </td>
                     <td class="px-6 py-4">{{ item.suggestedPrice?.format }}</td>
                     <td class="px-6 py-4">
                         <span :class="getStatusClass(item.status)"
