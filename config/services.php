@@ -44,4 +44,8 @@ return [
         'hosts'   => explode(',', env('ELASTICSEARCH_HOSTS')),
         'enabled' => env('ELASTICSEARCH_ENABLED', true),
     ],
+
+    'ai' => [
+        'host' => env('AI_HOST'),
+    ],
 ];

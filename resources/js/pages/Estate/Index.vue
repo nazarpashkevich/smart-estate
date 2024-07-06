@@ -7,10 +7,11 @@ import SearchForm from "@/components/Common/SearchForm.vue";
 import Pagination from "@/components/Common/List/Pagination.vue";
 import EstateList from "@/components/Estate/EstateList.vue";
 import { BaseData } from "@/contracts/base";
+import AskMeSection from "@/components/AI/AskMeSection.vue";
 
 export default defineComponent({
     name: "Index",
-    components: { EstateList, Pagination, SearchForm, EstateItemCard, MainLayout },
+    components: { AskMeSection, EstateList, Pagination, SearchForm, EstateItemCard, MainLayout },
     data: () => ({}),
     props: {
         filters: {
@@ -43,19 +44,7 @@ export default defineComponent({
             </div>
             <div class="w-1/3">
                 <!--@todo to component -->
-                <div class="border rounded-lg bg-white shadow-sm py-4 px-12">
-                    <h2 class="font-bold text-xl">Looking for something else?</h2>
-                    <a class="w-32 flex justify-center rounded-lg bg-blue-700 text-white px-3 py-2 my-4" href="#">
-                        Read more
-                        <svg aria-hidden="true"
-                             class="rtl:rotate-180 w-3.5 h-3.5 ms-2 my-auto translate-y-2/4	animate-bounce"
-                             fill="none" viewBox="0 0 14 10" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"/>
-                        </svg>
-                    </a>
-                </div>
+                <ask-me-section/>
             </div>
         </div>
     </MainLayout>

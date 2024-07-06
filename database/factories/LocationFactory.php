@@ -14,20 +14,25 @@ class LocationFactory extends Factory
 
     public function definition()
     {
+        $street = $this->faker->streetAddress;
+        $city = $this->faker->city;
+        $country = $this->faker->country;
+        $postcode = $this->faker->postcode;
+
         return [
             'lat'         => $this->faker->latitude,
             'lng'         => $this->faker->longitude,
-            'name'        => $this->faker->streetName,
-            'postcode'    => $this->faker->postcode,
+            'name'        => $this->faker->numberBetween(1, 330) . ", $street, $city, $country $postcode",
+            'postcode'    => $postcode,
             'county'      => $this->faker->state,
-            'city'        => $this->faker->city,
-            'country'     => $this->faker->country,
+            'city'        => $city,
+            'country'     => $country,
             'boundingbox' => [],
             'address'     => [
-                'street'  => $this->faker->streetAddress,
-                'city'    => $this->faker->city,
+                'street'  => $street,
+                'city'    => $city,
                 'state'   => $this->faker->state,
-                'country' => $this->faker->country,
+                'country' => $country,
             ],
         ];
     }

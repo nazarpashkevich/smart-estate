@@ -13,7 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             \App\Domains\Common\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
-        ]);
+        ])->validateCsrfTokens(except: [
+            'ai/chat', // <-- exclude this route
+        ]);;
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {

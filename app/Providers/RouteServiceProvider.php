@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Domains\AI\Http\Routing\AIRoutesRegistrar;
 use App\Domains\Auth\Http\Routing\AuthRouteRegistrar;
 use App\Domains\Common\Http\Routing\RouteRegistrar;
 use App\Domains\Dashboard\Http\Routing\DashboardRouteRegistrar;
@@ -20,6 +21,7 @@ class RouteServiceProvider extends ServiceProvider
 {
     protected array $registrars = [
         AuthRouteRegistrar::class,
+        AIRoutesRegistrar::class,
         DashboardRouteRegistrar::class,
         EstateRoutesRegistrar::class,
         HomeRoutesRegistrar::class,

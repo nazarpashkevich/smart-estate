@@ -5,10 +5,11 @@ import { EstateItem } from "@/contracts/estate-item";
 import PrimaryButton from "@/components/PrimaryButton.vue";
 import MapSection from "@/components/Common/MapSection.vue";
 import BuyForm from "@/pages/Estate/Partials/BuyForm.vue";
+import AskMeSection from "@/components/AI/AskMeSection.vue";
 
 export default defineComponent({
     name: "Show",
-    components: { BuyForm, MapSection, PrimaryButton, MainLayout },
+    components: { AskMeSection, BuyForm, MapSection, PrimaryButton, MainLayout },
     data: () => ({
         showBuyForm: false
     }),
@@ -28,7 +29,9 @@ export default defineComponent({
                     <div class="w-2/3">
                         <img :src="item.preview" alt="" class="w-[60rem]">
                     </div>
-                    <div class="bg-blue-500 w-1/3"></div>
+                    <div class="w-1/3">
+                        <ask-me-section/>
+                    </div>
                 </div>
                 <h1 class="text-4xl font-bold mb-4">{{ item.title }}</h1>
                 <div class="px-4">
