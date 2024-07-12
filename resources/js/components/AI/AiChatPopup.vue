@@ -1,33 +1,53 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import TextInput from "@/components/TextInput.vue";
 import PrimaryButton from "@/components/PrimaryButton.vue";
 import AiChatMessage from "@/components/AI/AiChatMessage.vue";
+import AIService from "@/services/AIService";
+import { ChatRole } from "@/enums/ai-chat";
 
 export default defineComponent({
     name: "AiChatPopup",
     components: { AiChatMessage, PrimaryButton, TextInput },
     data: () => ({
         message: '',
-        history: [
-            {
-                text: 'Hey, how are you?',
-                created: '12.12.2021 12:31',
-                sender: 'bot'
-            },
-            {
-                text: 'Hey, how are you?',
-                created: '12.12.2021 12:31',
-                sender: 'author'
-            }
-        ]
+        loading: false,
+        history: []
     }),
-    emits: ['close']
+    emits: ['close'],
+    async mounted() {
+        const messages = await new AIService().history();
+        if (Array.isArray(messages)) {
+            this.history.push(...messages);
+            this.scrollToEnd();
+        }
+    },
+    methods: {
+        async sendMessage() {
+            const message = this.message;
+            this.history.push({ text: message, role: ChatRole.User, createdAt: new Date() });
+            this.message = '';
+            this.loading = true;
+            const answer = ref('');
+            this.history.push({ text: answer, role: ChatRole.Assistant, createdAt: answer.createdAt });
+            await new AIService().send(message, (message) => answer.value = answer.value + message);
+            this.loading = false;
+
+        },
+        scrollToEnd() {
+            const el = this.$refs.messagesBlock;
+            if (el) {
+                // @todo not working
+                el.scrollTo({ top: el.scrollHeight });
+
+            }
+        }
+    },
 })
 </script>
 
 <template>
-    <div class="fixed border rounded-xl bg-white right-12 bottom-6 w-96 flex flex-col">
+    <div class="fixed border rounded-xl bg-white right-12 bottom-6 w-96 flex flex-col z-[9999]">
         <div class="bg-gray-300 px-6 py-3 items-center rounded-t-xl flex relative">
             <img alt="" class="mr-6 w-10" src="/images/chat/avatar.png">
             <p class="text-md text-blue-900 font-semibold">AI Bot</p>
@@ -39,15 +59,73 @@ export default defineComponent({
                 </svg>
             </span>
         </div>
-        <div class="bg-white h-96 px-6 py-3 flex flex-col gap-4">
+        <div ref="messagesBlock" class="bg-white h-96 px-6 py-3 flex flex-col gap-4 overflow-y-scroll">
             <template v-for="message in history">
-                <ai-chat-message :message="message"/>
+                <ai-chat-message v-if="message.text !== ''" :message="message"/>
             </template>
+            <div v-if="loading" class="border px-4 pt-2 pb-6 relative rounded-lg text-gray-700 min-w-32
+            bg-gray-100 mr-auto rounded-bl-none h-4 flex">
+                <div class="message-loader m-auto"></div>
+            </div>
         </div>
         <div class="border-t rounded-b-xl py-3 px-6 flex gap-4">
-            <text-input :model-value="message" class="w-full" placeholder="Type your message"/>
-            <primary-button class="ml-auto">Send</primary-button>
+            <text-input v-model="message" :disabled="loading" class="w-full" placeholder="Type your message"/>
+            <primary-button v-if="!loading" class="ml-auto" disabbled v-on:click="sendMessage">Send</primary-button>
+            <primary-button v-else class="ml-auto loader"></primary-button>
         </div>
     </div>
 </template>
+
+<style>
+.loader {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid;
+    border-color: #ffffff #0000;
+    animation: l1 1s infinite;
+}
+
+@keyframes l1 {
+    to {
+        transform: rotate(.5turn)
+    }
+}
+
+.message-loader {
+    width: 10px;
+    aspect-ratio: 1;
+    position: relative;
+}
+
+.message-loader::before,
+.message-loader::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #000;
+}
+
+.message-loader::before {
+    box-shadow: -25px 0;
+    animation: l8-1 1s infinite linear;
+}
+
+.message-loader::after {
+    transform: rotate(0deg) translateX(25px);
+    animation: l8-2 1s infinite linear;
+}
+
+@keyframes l8-1 {
+    100% {
+        transform: translateX(25px)
+    }
+}
+
+@keyframes l8-2 {
+    100% {
+        transform: rotate(-180deg) translateX(25px)
+    }
+}
+</style>
 

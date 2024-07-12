@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
+use App\Domains\AI\Assistants\AIAssistant;
+use App\Domains\AI\Assistants\Llama3Assistant;
 use App\Domains\AI\Contracts\AssistantMessageResolver;
-use App\Domains\AI\Factories\Assistants\AIAssistantChatFactory;
-use App\Domains\AI\Factories\Assistants\Llama3AssistantFactory;
-use App\Domains\AI\Factories\MessageResolvers\GeneralAssistantMessageResolver;
+use App\Domains\AI\Resolvers\MessageResolvers\GeneralAssistantMessageResolver;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,10 +24,10 @@ class AIServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(AIAssistantChatFactory::class, Llama3AssistantFactory::class);
+        $this->app->bind(AIAssistant::class, Llama3Assistant::class);
 
-        $this->app->bind(Llama3AssistantFactory::class, function ($app) {
-            return new Llama3AssistantFactory(Http::withQueryParameters([])
+        $this->app->bind(Llama3Assistant::class, function ($app) {
+            return new Llama3Assistant(Http::withQueryParameters([])
                 ->baseUrl(config('services.ai.host'))
                 ->timeout(60 * 20)
             );

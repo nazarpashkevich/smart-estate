@@ -2,11 +2,12 @@
 
 namespace App\Domains\AI\Services;
 
+use App\Domains\AI\Enums\ChatRole;
 use App\Domains\AI\Factories\ChatMessageFactory;
 use App\Domains\AI\Models\Chat;
-use App\Domains\AI\Models\ChatMessage;
 use App\Domains\User\Models\User;
 use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ChatService
 {
@@ -21,12 +22,18 @@ class ChatService
                    ->active()
                    ->first()
                    ?->messages()
+                   ->whereNot('role', ChatRole::System)
                    ->orderBy('id')
-                   ->get() ?? [];
+                   ->get() ?? new Collection();
     }
 
-    public function send(User $user, string $message): ChatMessage
+    /**
+     * RETURNS STREAMED CONTENT!
+     *
+     * @throws \App\Domains\AI\Exceptions\GeneratingAIResponseError
+     */
+    public function sendStreamed(User $user, string $message): StreamedResponse
     {
-        return ChatMessageFactory::make($user, $message)->send();
+        return ChatMessageFactory::make($user, $message)->send(true);
     }
 }

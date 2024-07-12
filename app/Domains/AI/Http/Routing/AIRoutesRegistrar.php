@@ -14,13 +14,13 @@ class AIRoutesRegistrar extends RouteRegistrar
     {
         // personal user routes
         $route->group(
-            ['prefix' => 'ai', 'as' => 'ai.'],
+            ['prefix' => 'ai', 'as' => 'ai.', 'middleware' => 'auth'],
             static function (Registrar $route) {
                 $route->group(
                     ['prefix' => 'chat', 'controller' => ChatController::class, 'as' => 'chat.',],
                     static function (Registrar $route) {
                         $route->get('', 'index')->name('index');
-                        $route->post('', 'send')->name('send');
+                        $route->get('send', 'send')->name('send');
                     }
                 );
             }
