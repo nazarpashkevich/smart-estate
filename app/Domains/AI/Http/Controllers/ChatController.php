@@ -2,7 +2,9 @@
 
 namespace App\Domains\AI\Http\Controllers;
 
+use App\Domains\AI\Assistants\Llama3Assistant;
 use App\Domains\AI\Data\ChatMessageData;
+use App\Domains\AI\Factories\ChatMessageFactory;
 use App\Domains\AI\Http\Requests\ChatMessageRequest;
 use App\Domains\AI\Services\ChatService;
 use F9Web\ApiResponseHelpers;
@@ -31,5 +33,24 @@ class ChatController
     public function send(ChatMessageRequest $request): StreamedResponse
     {
         return $this->chatService->sendStreamed(Auth::user(), $request->message());
+    }
+
+    public function initMessage(): JsonResponse
+    {
+        return $this->respondWithSuccess([
+            'message' => ChatMessageFactory::getInitMessage(),
+        ]);
+    }
+
+    public function clear(): JsonResponse
+    {
+        $this->chatService->clear(Auth::user());
+
+        return $this->respondOk('');
+    }
+
+    public function test()
+    {
+        return app(Llama3Assistant::class)->test();
     }
 }

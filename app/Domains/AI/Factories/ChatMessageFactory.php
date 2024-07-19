@@ -31,6 +31,7 @@ class ChatMessageFactory
         $this->chat = $chat;
 
         $this->createMessage($this->makeSystemPrompt(), ChatRole::System);
+        $this->createMessage($this::getInitMessage(), ChatRole::Assistant);
 
         return $chat;
     }
@@ -66,6 +67,9 @@ class ChatMessageFactory
     protected function makeSystemPrompt(): string
     {
         return '
+          ## PROPERTY DATA
+           <estate><APPARTMENTS_DATA></estate>
+
           ## INSTRUCTIONS
            You are an AI assistant expert specialized in real estate.
            Your primary function is to assist users by answering questions related to real estate, suggesting properties,
@@ -73,22 +77,15 @@ class ChatMessageFactory
              You have to follow instructions and steps very strictly and communicate only in estate domain.
 
 
-          ## PROPERTY DATA
-           <estate><APPARTMENTS_DATA></estate>
-
-
           ## RULES
-           When you provide to user information of property data, you must return id of record using the following format: <SUGGEST_APARTMENT>[id]</SUGGEST_APARTMENT>.
-           When you provide to user information of property data, ask the user to submit a request to contact the seller, if user agreed - you will move to step 4 keeping selected property.
-           Don\'t tell user about steps and don\'t tell notes.
-
-          ## NECESSARY STEPS TO FOLLOW
-           1. clarify user preferences, if user already agreed to submit request for some property - move to 4 step
-           2. find up and suggest to 3 appropriate properties
-           3. give user information about this property(-s) in human readable and understandable format, include id in format: <SUGGEST_APARTMENT>[id]</SUGGEST_APARTMENT> and ask to submit request, if user agreed - you will do next steps, if didn\'t - repeat from 1 step
-           4. clarify user contact data - name, phone and email, all fields are required
-           5. save user data and repeat user information in following format: {{APARTMENT_APPLICATION:{estateItemId: [ID here], name: [name here], phone: [phone here], email: [email here]}}, return to first step
+           When you provide to user information of property data, you must return id of record using the following format: <SUGGEST_APARTMENT>id</SUGGEST_APARTMENT>.
 '; //@todo to settings
+    }
+
+    public static function getInitMessage(): string
+    {
+        return "Hello! I'm an AI assistant expert specialized in real estate. How can I assist you today?
+         Please feel free to provide me with some context or what's on your mind, and I'll do my best to help!";
     }
 
     public static function make(User $user, string $message): self

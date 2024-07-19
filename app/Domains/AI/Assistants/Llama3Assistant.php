@@ -2,6 +2,7 @@
 
 namespace App\Domains\AI\Assistants;
 
+use App\Domains\Estate\Models\EstateItem;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Collection;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -28,5 +29,14 @@ class Llama3Assistant extends AIAssistant
         ]);
 
         return $this->parseStreamedResponse($response->toPsrResponse()->getBody());
+    }
+
+    public function test()
+    {
+        $response = $this->client->post(
+            'api/embeddings',
+            ['model' => 'mxbai-embed-large', 'prompt' => EstateItem::query()->get()->toJson()]
+        );
+        dd($response->body());
     }
 }

@@ -21,6 +21,9 @@ class AIRoutesRegistrar extends RouteRegistrar
                     static function (Registrar $route) {
                         $route->get('', 'index')->name('index');
                         $route->get('send', 'send')->name('send');
+                        $route->get('init-message', 'initMessage')->name('init-message');
+                        $route->delete('clear', 'clear')->name('clear');
+                        $route->get('test', 'test')->name('test');
                     }
                 );
             }

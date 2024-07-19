@@ -8,6 +8,12 @@ export default class {
         return result.data;
     }
 
+    public async getInitMessage(): Promise<string> {
+        const result = await axios.get(route('ai.chat.init-message'));
+
+        return result.data.message ?? '';
+    }
+
     public async send(message: string, callback: (e: string) => void): Promise<ChatMessage> {
         const result = await axios.get(
             route('ai.chat.send'),
@@ -27,5 +33,9 @@ export default class {
         }
 
         return result.data;
+    }
+
+    public async deleteChat(): Promise<void> {
+        await axios.delete(route('ai.chat.clear'));
     }
 }
