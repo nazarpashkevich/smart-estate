@@ -1,0 +1,44 @@
+services:
+  ollama:
+    build:
+      dockerfile: .Dockerfile
+      context: ./ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_HOST=0.0.0.0
+      - N_GPU_LAYERS=35
+      - N_BATCH= 4096
+      - N_THREADS=4
+      - LLAMA_CUBLAS=1
+    volumes:
+      - 'sail-ollama:/root/.ollama'
+    networks:
+      - sail
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+  ollama-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: ollama-webui
+    volumes:
+      - 'sail-ollama-webui:/app/backend/data'
+    depends_on:
+      - ollama
+    ports:
+      - 5002:8080
+    extra_hosts:
+      - "ollama:host-gateway"
+    networks:
+      - sail
+volumes:
+  sail-ollama:
+    driver: local
+  sail-ollama-webui:
+    driver: local
