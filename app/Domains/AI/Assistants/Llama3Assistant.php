@@ -23,7 +23,18 @@ class Llama3Assistant extends AIAssistant
     {
         $response = $this->client->send('POST', 'api/chat', [
             'body'   => json_encode(
-                ['model' => $this::MODEL_CODE, 'messages' => $messages->toArray(), 'stream' => $streamed]
+                [
+                    'model'      => $this::MODEL_CODE,
+                    'messages'   => $messages->toArray(),
+                    'stream'     => $streamed,
+                    'keep_alive' => "20m",
+                    'options'    => [
+                        'num_ctx'     => 8192,
+                        'temperature' => 0.7,
+                        'top_k'       => 20,
+                        'top_p'       => 0.8,
+                    ],
+                ]
             ),
             'stream' => true,
         ]);

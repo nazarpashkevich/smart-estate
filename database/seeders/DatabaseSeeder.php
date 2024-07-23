@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        EstateItem::factory()->count(20)->create();
+        EstateItem::factory()->count(50)->create();
     }
 }

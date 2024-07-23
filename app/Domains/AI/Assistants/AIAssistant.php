@@ -6,7 +6,6 @@ use App\Domains\AI\Contracts\AssistantMessageResolver;
 use App\Domains\AI\Models\Chat;
 use App\Domains\AI\Models\ChatMessage;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use Psr\Http\Message\StreamInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -54,7 +53,6 @@ abstract class AIAssistant
 
             while (!$body->eof()) {
                 $char = $body->read(1);
-                Log::info("char " . $char);
                 $buffer .= $char;
 
                 if ($char === '{') {
