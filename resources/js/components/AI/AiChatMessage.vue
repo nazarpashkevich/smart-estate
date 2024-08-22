@@ -30,6 +30,7 @@ export default defineComponent({
             const converter = new showdown.Converter();
             return converter.makeHtml(
                 this.message.text.replace(/<SUGGEST_APARTMENT>([0-9]*)<\/SUGGEST_APARTMENT>/g, '')
+                    .replace(/<APARTMENT_APPLICATION>(.*)<\/APARTMENT_APPLICATION>/g, '')
             );
         },
         apartmentIds() {

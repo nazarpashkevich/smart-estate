@@ -2,7 +2,6 @@
 
 namespace App\Domains\AI\Http\Controllers;
 
-use App\Domains\AI\Assistants\Llama3Assistant;
 use App\Domains\AI\Data\ChatMessageData;
 use App\Domains\AI\Factories\ChatMessageFactory;
 use App\Domains\AI\Http\Requests\ChatMessageRequest;

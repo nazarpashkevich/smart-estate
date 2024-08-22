@@ -2,6 +2,7 @@
 
 namespace App\Domains\Estate\Models;
 
+use Akaunting\Money\Money;
 use App\Domains\Common\Casts\MoneyCast;
 use App\Domains\Common\Traits\Model\Arrayable;
 use App\Domains\Common\Traits\Model\InteractWithBuilder;
@@ -30,7 +31,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property bool                                     $has_parking
  * @property float                                    $lat
  * @property float                                    $lng
- * @property float                                    $price
+ * @property Money                                    $price
  * @property string[]                                 $features
  *
  * @property \App\Domains\Location\Models\Location    $location
@@ -85,6 +86,33 @@ class EstateItem extends Model implements ElasticSearchable
             'year_of_build' => $this->year_of_build,
             'location'      => [
                 'name'     => $this->location->name,
+                'postcode' => $this->location->postcode,
+            ],
+        ];
+    }
+
+    public function toVectorStoreArray(): array
+    {
+        $this->loadMissing('location');
+
+        return [
+            'property_id'   => $this->id,
+            'description'   => $this->description,
+            'type'          => $this->type->value,
+            'rooms'         => $this->rooms,
+            'floor'         => $this->floor,
+            'year_of_build' => $this->year_of_build,
+            'square'        => $this->square,
+            'bedrooms'      => $this->bedrooms,
+            'price'         => [
+                'value'    => $this->price->getValue(),
+                'currency' => $this->price->getCurrency()->getCurrency(),
+            ],
+            'features'      => $this->features,
+            'location'      => [
+                'name'     => $this->location->name,
+                'city'     => $this->location->city,
+                'county'   => $this->location->county,
                 'postcode' => $this->location->postcode,
             ],
         ];
