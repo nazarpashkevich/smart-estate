@@ -128,7 +128,3 @@ Use Laravel Jobs and Queues for regularly updating data from external sources
 Develop mechanisms for processing and storing obtained data
 This project will allow you to demonstrate your skills in full-stack application development and the integration and use
 of machine learning technologies to solve real-world problems.
-
-## Improvements
-
-- Customize ollama docker image and write custom logic for using a vector database (maybe together with elasticsearch)

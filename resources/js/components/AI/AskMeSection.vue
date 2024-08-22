@@ -6,7 +6,7 @@ export default defineComponent({
     name: "AskMeSection",
     components: { AiChatPopup },
     data: () => ({
-        showChat: true
+        showChat: false
     })
 })
 </script>
