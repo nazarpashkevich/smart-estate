@@ -1,5 +1,5 @@
 export enum EstateApplicationStatus {
-    New = 'new',
-    Approved = 'approved',
-    Rejected = 'rejected',
+  New = 'new',
+  Approved = 'approved',
+  Rejected = 'rejected',
 }

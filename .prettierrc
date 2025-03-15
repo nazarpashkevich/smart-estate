@@ -1,0 +1,23 @@
+{
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "quoteProps": "consistent",
+    "importOrder": [
+        "<THIRD_PARTY_MODULES>",
+        "^@internal/(.*)$",
+        "^[./]",
+        "^[.]/.*\\.(module\\.)?(css|scss|less)$"
+    ],
+    "plugins": [
+        "prettier-plugin-tailwindcss",
+        "prettier-plugin-organize-imports"
+    ]
+}

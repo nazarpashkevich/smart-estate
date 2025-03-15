@@ -6,93 +6,98 @@ import TextInput from '@/components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 
 defineProps<{
-    mustVerifyEmail?: Boolean;
-    status?: String;
+  mustVerifyEmail?: Boolean;
+  status?: String;
 }>();
 
 const user = usePage().props.auth.user;
 
 const form = useForm({
-    name: user.name,
-    email: user.email,
+  name: user.name,
+  email: user.email,
 });
 </script>
 
 <template>
-    <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">Profile Information</h2>
+  <section>
+    <header>
+      <h2 class="text-lg font-medium text-gray-900">Profile Information</h2>
 
-            <p class="mt-1 text-sm text-gray-600">
-                Update your account's profile information and email address.
-            </p>
-        </header>
+      <p class="mt-1 text-sm text-gray-600">
+        Update your account's profile information and email address.
+      </p>
+    </header>
 
-        <form class="mt-6 space-y-6" @submit.prevent="form.patch(route('profile.update'))">
-            <div>
-                <input-label for="name" value="Name"/>
+    <form
+      class="mt-6 space-y-6"
+      @submit.prevent="form.patch(route('profile.update'))"
+    >
+      <div>
+        <input-label for="name" value="Name" />
 
-                <text-input
-                    id="name"
-                    v-model="form.name"
-                    autocomplete="name"
-                    autofocus
-                    class="mt-1 block w-full"
-                    required
-                    type="text"
-                />
+        <text-input
+          id="name"
+          v-model="form.name"
+          autocomplete="name"
+          autofocus
+          class="mt-1 block w-full"
+          required
+          type="text"
+        />
 
-                <input-error :message="form.errors.name" class="mt-2"/>
-            </div>
+        <input-error :message="form.errors.name" class="mt-2" />
+      </div>
 
-            <div>
-                <input-label for="email" value="Email"/>
+      <div>
+        <input-label for="email" value="Email" />
 
-                <text-input
-                    id="email"
-                    v-model="form.email"
-                    autocomplete="username"
-                    class="mt-1 block w-full"
-                    required
-                    type="email"
-                />
+        <text-input
+          id="email"
+          v-model="form.email"
+          autocomplete="username"
+          class="mt-1 block w-full"
+          required
+          type="email"
+        />
 
-                <input-error :message="form.errors.email" class="mt-2"/>
-            </div>
+        <input-error :message="form.errors.email" class="mt-2" />
+      </div>
 
-            <div v-if="mustVerifyEmail && user.email_verified_at === null">
-                <p class="text-sm mt-2 text-gray-800">
-                    Your email address is unverified.
-                    <Link
-                        :href="route('verification.send')"
-                        as="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        method="post"
-                    >
-                        Click here to re-send the verification email.
-                    </Link>
-                </p>
+      <div v-if="mustVerifyEmail && user.email_verified_at === null">
+        <p class="text-sm mt-2 text-gray-800">
+          Your email address is unverified.
+          <Link
+            :href="route('verification.send')"
+            as="button"
+            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            method="post"
+          >
+            Click here to re-send the verification email.
+          </Link>
+        </p>
 
-                <div
-                    v-show="status === 'verification-link-sent'"
-                    class="mt-2 font-medium text-sm text-green-600"
-                >
-                    A new verification link has been sent to your email address.
-                </div>
-            </div>
+        <div
+          v-show="status === 'verification-link-sent'"
+          class="mt-2 font-medium text-sm text-green-600"
+        >
+          A new verification link has been sent to your email address.
+        </div>
+      </div>
 
-            <div class="flex items-center gap-4">
-                <primary-button :disabled="form.processing">Save</primary-button>
+      <div class="flex items-center gap-4">
+        <primary-button :disabled="form.processing">Save</primary-button>
 
-                <transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
-                </transition>
-            </div>
-        </form>
-    </section>
+        <transition
+          enter-active-class="transition ease-in-out"
+          enter-from-class="opacity-0"
+          leave-active-class="transition ease-in-out"
+          leave-to-class="opacity-0"
+        >
+          <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">
+            Saved.
+          </p>
+        </transition>
+      </div>
+    </form>
+  </section>
 </template>

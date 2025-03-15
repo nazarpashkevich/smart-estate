@@ -6,9 +6,7 @@
   "resources/js/components/ApplicationLogo.vue": [
     "/build/assets/ApplicationLogo-DYfMgKl5.js"
   ],
-  "resources/js/components/Checkbox.vue": [
-    "/build/assets/Login-Csh5kCJr.js"
-  ],
+  "resources/js/components/Checkbox.vue": ["/build/assets/Login-Csh5kCJr.js"],
   "resources/js/components/Checkbox.vue?vue&type=script&setup=true&lang.ts": [
     "/build/assets/Login-Csh5kCJr.js"
   ],
@@ -138,9 +136,7 @@
   "resources/js/layouts/Main/MainHeader.vue?vue&type=script&lang.ts": [
     "/build/assets/Index-DWCYvnrC.js"
   ],
-  "resources/js/layouts/MainLayout.vue": [
-    "/build/assets/Index-DWCYvnrC.js"
-  ],
+  "resources/js/layouts/MainLayout.vue": ["/build/assets/Index-DWCYvnrC.js"],
   "resources/js/layouts/MainLayout.vue?vue&type=script&lang.ts": [
     "/build/assets/Index-DWCYvnrC.js"
   ],
@@ -156,9 +152,7 @@
   "resources/js/pages/Auth/ForgotPassword.vue?vue&type=script&setup=true&lang.ts": [
     "/build/assets/ForgotPassword-DVtWSyvy.js"
   ],
-  "resources/js/pages/Auth/Login.vue": [
-    "/build/assets/Login-Csh5kCJr.js"
-  ],
+  "resources/js/pages/Auth/Login.vue": ["/build/assets/Login-Csh5kCJr.js"],
   "resources/js/pages/Auth/Login.vue?vue&type=script&setup=true&lang.ts": [
     "/build/assets/Login-Csh5kCJr.js"
   ],
@@ -180,21 +174,15 @@
   "resources/js/pages/Auth/VerifyEmail.vue?vue&type=script&setup=true&lang.ts": [
     "/build/assets/VerifyEmail-BeTga3zy.js"
   ],
-  "resources/js/pages/Dashboard.vue": [
-    "/build/assets/Dashboard-WofIalmj.js"
-  ],
+  "resources/js/pages/Dashboard.vue": ["/build/assets/Dashboard-WofIalmj.js"],
   "resources/js/pages/Dashboard.vue?vue&type=script&setup=true&lang.ts": [
     "/build/assets/Dashboard-WofIalmj.js"
   ],
-  "resources/js/pages/Home.vue": [
-    "/build/assets/Home-B0cMDNr4.js"
-  ],
+  "resources/js/pages/Home.vue": ["/build/assets/Home-B0cMDNr4.js"],
   "resources/js/pages/Home.vue?vue&type=script&setup=true&lang.ts": [
     "/build/assets/Home-B0cMDNr4.js"
   ],
-  "resources/js/pages/Profile/Edit.vue": [
-    "/build/assets/Edit-yZAHqj4Y.js"
-  ],
+  "resources/js/pages/Profile/Edit.vue": ["/build/assets/Edit-yZAHqj4Y.js"],
   "resources/js/pages/Profile/Edit.vue?vue&type=script&setup=true&lang.ts": [
     "/build/assets/Edit-yZAHqj4Y.js"
   ],
@@ -216,9 +204,7 @@
   "resources/js/pages/Profile/Partials/UpdateProfileInformationForm.vue?vue&type=script&setup=true&lang.ts": [
     "/build/assets/UpdateProfileInformationForm-ClWkgY7l.js"
   ],
-  "resources/js/pages/Search/Index.vue": [
-    "/build/assets/Index-DWCYvnrC.js"
-  ],
+  "resources/js/pages/Search/Index.vue": ["/build/assets/Index-DWCYvnrC.js"],
   "resources/js/pages/Search/Index.vue?vue&type=script&lang.ts": [
     "/build/assets/Index-DWCYvnrC.js"
   ],
