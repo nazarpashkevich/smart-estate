@@ -4,43 +4,40 @@ namespace App\Domains\AI\Jobs;
 
 use App\Domains\Estate\Models\EstateItem;
 use Elastic\Elasticsearch\Client;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use LLPhant\Embeddings\Document;
 use LLPhant\Embeddings\EmbeddingGenerator\Ollama\OllamaEmbeddingGenerator;
 use LLPhant\Embeddings\VectorStores\Elasticsearch\ElasticsearchVectorStore;
 
-class ReindexVectorDataJob implements ShouldQueue
+class ReindexVectorDataJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, SerializesModels;
+
 
     /**
      * Create a new job instance.
      */
-    public function __construct(
-        protected OllamaEmbeddingGenerator $embeddingGenerator,
-        protected ElasticsearchVectorStore $vectorStore,
-        protected Client $client,
-    ) {
-        //
+    public function __construct()
+    {
     }
 
     /**
      * Execute the job.
      */
-    public function handle(): void
-    {
+    public function handle(
+        OllamaEmbeddingGenerator $embeddingGenerator,
+        ElasticsearchVectorStore $vectorStore,
+        Client $client
+    ): void {
         // clear store
-        $this->client->deleteByQuery([
-            'index' => $this->vectorStore->indexName,
+        $client->deleteByQuery([
+            'index' => $vectorStore->indexName,
             'body'  => ['query' => ['match_all' => new \stdClass()]],
         ]);
 
         // add new documents
-        $embeddedDocuments = $this->embeddingGenerator->embedDocuments(
+        $embeddedDocuments = $embeddingGenerator->embedDocuments(
             EstateItem::query()
                 ->with('location')
                 ->get()
@@ -53,7 +50,7 @@ class ReindexVectorDataJob implements ShouldQueue
                 ->toArray()
         );
 
-        $this->vectorStore->addDocuments($embeddedDocuments);
+        $vectorStore->addDocuments($embeddedDocuments);
     }
 }
 

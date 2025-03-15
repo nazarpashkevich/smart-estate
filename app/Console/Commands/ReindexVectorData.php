@@ -24,7 +24,7 @@ class ReindexVectorData extends Command
     /**
      * Execute the console command.
      */
-    public function hande(): void
+    public function handle(): void
     {
         ReindexVectorDataJob::dispatch();
     }

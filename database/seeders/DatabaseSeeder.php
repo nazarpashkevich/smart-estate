@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Domains\Estate\Models\EstateItem;
+use App\Domains\User\Models\User;
 use Illuminate\Database\Seeder;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->count(1)->create();
         EstateItem::factory()->count(50)->create();
     }
 }

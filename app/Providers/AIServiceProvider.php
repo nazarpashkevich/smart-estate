@@ -59,7 +59,7 @@ class AIServiceProvider extends ServiceProvider
             $config->model = config('ai.model');
             $config->url = $embeddingGeneratorConfig->url;
             $config->modelOptions = [
-                'num_ctx'     => 8192,
+                'num_ctx'     => 8192, // @todo move to config
                 'temperature' => 0.7,
                 'top_k'       => 20,
                 'top_p'       => 0.8,
