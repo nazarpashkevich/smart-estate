@@ -1,14 +1,11 @@
 <script lang="ts">
-import * as L from 'leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'MapSection',
   computed: {},
-  data: () => ({
-    map: null,
-  }),
   props: {
     lat: {
       type: Number,
@@ -24,14 +21,14 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.map = L.map('map').setView([this.lat, this.lng], this.zoom);
+    const map = L.map('map').setView([this.lat, this.lng], this.zoom);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(this.map);
+    }).addTo(map);
 
-    L.marker([this.lat, this.lng]).addTo(this.map);
+    L.marker([this.lat, this.lng]).addTo(map);
   },
 });
 </script>

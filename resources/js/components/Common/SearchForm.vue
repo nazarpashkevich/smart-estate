@@ -7,7 +7,11 @@ export default defineComponent({
   methods: {
     searchAction() {
       router.visit(route('estate.index'), {
-        data: { filters: { search: this.$refs.searchQuery.value } },
+        data: {
+          filters: {
+            search: (this.$refs.searchQuery as HTMLInputElement)?.value,
+          },
+        },
       });
     },
   },

@@ -33,9 +33,10 @@ export default defineComponent({
     navigate() {
       const params = new URLSearchParams(window.location.search);
 
-      params.set(this.pageName, this.page);
+      params.set(this.pageName, this.page.toString());
 
-      router.visit(this.path, { data: params });
+      const paramsObject = Object.fromEntries(params.entries());
+      router.visit(this.path, { data: paramsObject });
     },
   },
 });

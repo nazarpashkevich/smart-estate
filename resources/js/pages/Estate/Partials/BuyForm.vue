@@ -10,7 +10,7 @@ import TextArea from '@/components/TextArea.vue';
 import TextInput from '@/components/TextInput.vue';
 import { EstateItem } from '@/contracts/estate-item';
 import { useForm, usePage } from '@inertiajs/vue3';
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'BuyForm',
@@ -29,7 +29,7 @@ export default defineComponent({
     submitted: false,
   }),
   props: {
-    item: Object as EstateItem,
+    item: Object as PropType<EstateItem>,
   },
   methods: {
     submit() {
@@ -39,7 +39,7 @@ export default defineComponent({
       });
     },
   },
-  setup(props) {
+  setup(props: { item: EstateItem }) {
     const user = usePage().props.auth.user;
 
     const form = useForm({

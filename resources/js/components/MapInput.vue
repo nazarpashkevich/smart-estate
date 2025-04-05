@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as L from 'leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { defineComponent } from 'vue';
 
@@ -7,8 +7,8 @@ export default defineComponent({
   name: 'MapInput',
   computed: {},
   data: () => ({
-    map: null,
-    marker: null,
+    map: null as null | L.Map,
+    marker: null as null | L.Marker,
   }),
   props: {
     lat: {
@@ -22,7 +22,7 @@ export default defineComponent({
   },
   emits: ['update:lat', 'update:lng'],
   methods: {
-    onMapClick(e) {
+    onMapClick(e: { latlng: L.LatLng }) {
       const coords = e.latlng;
       this.$emit('update:lat', coords.lat);
       this.$emit('update:lng', coords.lng);
@@ -31,7 +31,9 @@ export default defineComponent({
         return;
       }
 
-      this.marker ??= L.marker(coords).addTo(this.map);
+      if (this.map) {
+        this.marker ??= L.marker(coords).addTo(this.map as L.Map);
+      }
     },
   },
   mounted() {
@@ -42,18 +44,20 @@ export default defineComponent({
       mapCenter.lng = this.lng;
     }
 
-    this.map = L.map('map').setView(mapCenter, 6);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(this.map);
+    if (this.map) {
+      this.map = L.map('map').setView(mapCenter, 6);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(this.map as L.Map);
 
-    this.map.on('click', this.onMapClick);
+      this.map.on('click', this.onMapClick);
 
-    if (this.lat && this.lng) {
-      // add mark if it is editing
-      this.onMapClick({ latlng: { lat: this.lat, lng: this.lng } });
+      if (this.lat && this.lng) {
+        // add mark if it is editing
+        this.onMapClick({ latlng: L.latLng(this.lat, this.lng) });
+      }
     }
   },
 });

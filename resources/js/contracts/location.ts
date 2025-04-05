@@ -1,6 +1,6 @@
 export interface Location {
-  lat: Number;
-  lng: Number;
+  lat: number;
+  lng: number;
   name: string;
   postcode: string;
   county: string;

@@ -5,7 +5,7 @@ import PrimaryButton from '@/components/PrimaryButton.vue';
 import { EstateItem } from '@/contracts/estate-item';
 import MainLayout from '@/layouts/MainLayout.vue';
 import BuyForm from '@/pages/Estate/Partials/BuyForm.vue';
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Show',
@@ -15,7 +15,8 @@ export default defineComponent({
   }),
   props: {
     item: {
-      type: Object as EstateItem,
+      type: Object as PropType<EstateItem>,
+      required: true,
     },
   },
 });

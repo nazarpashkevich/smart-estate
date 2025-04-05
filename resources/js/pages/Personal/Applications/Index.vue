@@ -9,7 +9,7 @@ import { enumToSelectOptions } from '@/helpers/helpers';
 import UserLayout from '@/layouts/UserLayout.vue';
 import ApplicationList from '@/pages/Personal/Applications/Partials/ApplicationList.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Index',
@@ -20,7 +20,7 @@ export default defineComponent({
   },
   methods: {
     enumToSelectOptions,
-    onUpdateStatus(status) {
+    onUpdateStatus(status: string) {
       const oldStatus = this.filtersForm.status ?? null;
       this.filtersForm.status = status;
 
@@ -54,7 +54,7 @@ export default defineComponent({
   }),
   props: {
     items: {
-      type: Object as BaseData<EstateApplication>,
+      type: Object as PropType<BaseData<EstateApplication>>,
       required: true,
     },
     filters: {
@@ -68,7 +68,7 @@ export default defineComponent({
     });
 
     const statuses = enumToSelectOptions(EstateApplicationStatus);
-    statuses.unshift({ key: null, value: 'All' });
+    statuses.unshift({ key: '', value: 'All' });
 
     return { filtersForm, statuses };
   },

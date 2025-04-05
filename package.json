@@ -8,6 +8,8 @@
     "devDependencies": {
         "@inertiajs/vue3": "^2.0.0",
         "@tailwindcss/forms": "^0.5.3",
+        "@types/leaflet": "^1.9.17",
+        "@types/showdown": "^2.0.6",
         "@vitejs/plugin-vue": "^5.2.1",
         "@vue/server-renderer": "^3.5.0",
         "autoprefixer": "^10.4.21",

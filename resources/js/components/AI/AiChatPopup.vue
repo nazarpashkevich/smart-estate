@@ -3,6 +3,7 @@ import AiChatMessage from '@/components/AI/AiChatMessage.vue';
 import PrimaryButton from '@/components/PrimaryButton.vue';
 import SecondaryButton from '@/components/SecondaryButton.vue';
 import TextInput from '@/components/TextInput.vue';
+import { ChatMessage } from '@/contracts/ai-chat';
 import { ChatRole } from '@/enums/ai-chat';
 import AIService from '@/services/AIService';
 import { Link, usePage } from '@inertiajs/vue3';
@@ -22,7 +23,7 @@ export default defineComponent({
   data: () => ({
     message: '',
     loading: false,
-    history: [],
+    history: [] as ChatMessage[],
   }),
   emits: ['close'],
   async mounted() {
@@ -30,7 +31,6 @@ export default defineComponent({
   },
   methods: {
     async init() {
-      this.history = [];
       const messages = await new AIService().history();
       if (Array.isArray(messages)) {
         this.history.push(...messages);
@@ -44,6 +44,7 @@ export default defineComponent({
     async sendMessage() {
       const message = this.message;
       this.history.push({
+        id: 0,
         text: message,
         role: ChatRole.User,
         createdAt: new Date(),
@@ -61,9 +62,10 @@ export default defineComponent({
 
       const answer = ref('');
       this.history.push({
-        text: answer,
+        id: 0,
+        text: answer.value,
         role: ChatRole.Assistant,
-        createdAt: answer.createdAt,
+        createdAt: new Date(),
       });
       await aiService.send(
         message,
@@ -72,7 +74,7 @@ export default defineComponent({
       this.loading = false;
     },
     scrollToEnd() {
-      const el = this.$refs.messagesBlock;
+      const el = this.$refs.messagesBlock as HTMLElement;
       if (el) {
         el.scrollTo({
           top: el.scrollHeight - el.clientHeight,
@@ -82,6 +84,7 @@ export default defineComponent({
     },
     async initChat() {
       this.history.push({
+        id: 0,
         text: await aiService.getInitMessage(),
         role: ChatRole.Assistant,
         createdAt: new Date(),
@@ -110,7 +113,7 @@ export default defineComponent({
       <img alt="" class="mr-6 w-10" src="/images/chat/avatar.png" />
       <p class="text-md text-blue-900 font-semibold">AI Bot</p>
       <span class="text-xs text-gray-500 ml-4">online</span>
-      <span class="cursor-pointer ml-auto" v-on:click="this.$emit('close')">
+      <span class="cursor-pointer ml-auto" v-on:click="$emit('close')">
         <svg
           height="20px"
           viewBox="0 0 50 50"
@@ -161,7 +164,7 @@ export default defineComponent({
             >Send
           </primary-button>
           <span
-            v-if="this.history.length > 0"
+            v-if="history.length > 0"
             class="ml-auto my-auto cursor-pointer"
             v-on:click="deleteChat"
           >

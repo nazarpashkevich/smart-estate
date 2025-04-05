@@ -15,7 +15,7 @@ export default defineComponent({
       <slot name="filters"></slot>
     </div>
     <div class="flex">
-      <primary-button class="ml-auto" v-on:click="this.$emit('submit')"
+      <primary-button class="ml-auto" v-on:click="$emit('submit')"
         >Apply</primary-button
       >
     </div>

@@ -1,5 +1,6 @@
 <script lang="ts">
 import SelectInput from '@/components/SelectInput.vue';
+import { SelectOption } from '@/contracts/base';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -40,9 +41,9 @@ export default defineComponent({
     const options = Array.from(Array(countOptions).keys()).map(
       (value: number) => {
         let item = props.step * value;
-        return { key: item, value: item };
+        return { key: item.toString(), value: item.toString() };
       },
-    );
+    ) as SelectOption[];
 
     return { options };
   },
@@ -57,7 +58,7 @@ export default defineComponent({
       :options="options"
       :with-empty="true"
       class="flex-1"
-      @update:model-value="(e) => this.$emit('update:from', e)"
+      @update:model-value="(e) => $emit('update:from', e)"
     />
     <span class="my-auto">-></span>
     <select-input
@@ -69,7 +70,7 @@ export default defineComponent({
       "
       :with-empty="true"
       class="flex-1"
-      @update:model-value="(e) => this.$emit('update:to', e)"
+      @update:model-value="(e) => $emit('update:to', e)"
     />
   </div>
 </template>

@@ -5,13 +5,13 @@ import { EstateItem } from '@/contracts/estate-item';
 import UserLayout from '@/layouts/UserLayout.vue';
 import EstateItemForm from '@/pages/Personal/Estate/Partials/EstateItemForm.vue';
 import { Head } from '@inertiajs/vue3';
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Edit',
   components: { EstateItemForm, EstateList, PrimaryButton, UserLayout, Head },
   props: {
-    item: Object as EstateItem,
+    item: Object as PropType<EstateItem>,
   },
 });
 </script>

@@ -1,10 +1,13 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 
 export default defineComponent({
   name: 'ImageInput',
   props: {
-    modelValue: {},
+    modelValue: {
+      type: String as PropType<string | null>,
+      default: '',
+    },
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {

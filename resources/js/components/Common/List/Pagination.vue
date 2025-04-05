@@ -2,14 +2,14 @@
 import PaginationItem from '@/components/Common/List/PaginationItem.vue';
 import { PaginationMeta } from '@/contracts/base';
 import { router } from '@inertiajs/vue3';
-import { defineComponent } from 'vue';
+import { defineComponent, PropType, reactive } from 'vue';
 
 export default defineComponent({
   name: 'Pagination',
   components: { PaginationItem },
   computed: {
     pages() {
-      const pages = [];
+      const pages = reactive<number[]>([]);
 
       if (this.meta.total === 0) {
         return pages;
@@ -43,7 +43,7 @@ export default defineComponent({
   },
   props: {
     meta: {
-      type: Object as PaginationMeta,
+      type: Object as PropType<PaginationMeta>,
       required: true,
     },
   },
@@ -51,7 +51,7 @@ export default defineComponent({
     router() {
       return router;
     },
-    isActive(page: number) {
+    isActive(page: number): boolean {
       return this.meta.current_page === page;
     },
   },

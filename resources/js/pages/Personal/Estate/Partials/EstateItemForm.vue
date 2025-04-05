@@ -17,7 +17,7 @@ import {
 } from '@/enums/estate-item';
 import { enumToSelectOptions } from '@/helpers/helpers';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'EstateItemForm',
@@ -46,7 +46,7 @@ export default defineComponent({
   },
   props: {
     item: {
-      type: Object as EstateItem,
+      type: Object as PropType<EstateItem>,
       default: null,
     },
   },
@@ -75,7 +75,7 @@ export default defineComponent({
     const user = usePage().props.auth.user;
 
     const form = useForm({
-      preview: props.item?.preview ?? '',
+      preview: (props.item?.preview ?? null) as string | null,
       description: props.item?.description ?? '',
       rooms: props.item?.rooms ?? 1,
       floor: props.item?.floor ?? 1,
@@ -91,7 +91,7 @@ export default defineComponent({
     });
 
     const types = Object.keys(EstateItemType).map((value: string) => ({
-      key: EstateItemType[value],
+      key: EstateItemType[value as keyof typeof EstateItemType],
       value,
     }));
 

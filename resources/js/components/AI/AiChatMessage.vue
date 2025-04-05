@@ -4,13 +4,13 @@ import { ChatMessage } from '@/contracts/ai-chat';
 import { ChatRole } from '@/enums/ai-chat';
 import dayjs from 'dayjs';
 import showdown from 'showdown';
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'AiChatMessage',
   props: {
     message: {
-      type: Object as ChatMessage,
+      type: Object as PropType<ChatMessage>,
       required: true,
     },
   },
@@ -19,17 +19,17 @@ export default defineComponent({
     dayjs() {
       return dayjs;
     },
-    messageClasses() {
+    messageClasses(): string {
       return this.message.role === ChatRole.User
         ? 'bg-blue-100 text-right ml-auto rounded-br-none'
         : 'bg-gray-100 mr-auto rounded-bl-none';
     },
-    createdTipClasses() {
-      return this.message.sender === ChatRole.User
+    createdTipClasses(): string {
+      return this.message.role === ChatRole.User
         ? 'text-blue-400'
         : 'text-gray-400';
     },
-    messageTextWithoutPlaceholders() {
+    messageTextWithoutPlaceholders(): string {
       const converter = new showdown.Converter();
       return converter.makeHtml(
         this.message.text
@@ -37,13 +37,13 @@ export default defineComponent({
           .replace(/<APARTMENT_APPLICATION>(.*)<\/APARTMENT_APPLICATION>/g, ''),
       );
     },
-    apartmentIds() {
+    apartmentIds(): number[] {
       const ids = [];
       const regex = /<SUGGEST_APARTMENT>([0-9]*)<\/SUGGEST_APARTMENT>/g;
       let match;
 
       while ((match = regex.exec(this.message.text)) !== null) {
-        ids.push(match[1]);
+        ids.push(Number.parseInt(match[1]));
       }
 
       return ids;

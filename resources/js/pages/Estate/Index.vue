@@ -8,7 +8,7 @@ import RandomFactSection from '@/components/Useless/RandomFactSection.vue';
 import { BaseData } from '@/contracts/base';
 import { EstateItem } from '@/contracts/estate-item';
 import MainLayout from '@/layouts/MainLayout.vue';
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Index',
@@ -27,7 +27,7 @@ export default defineComponent({
       type: Object,
     },
     items: {
-      type: Object as BaseData<EstateItem>,
+      type: Object as PropType<BaseData<EstateItem>>,
       default: [],
     },
   },

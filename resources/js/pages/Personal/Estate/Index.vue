@@ -19,7 +19,7 @@ import {
 import { enumToSelectOptions } from '@/helpers/helpers';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Create',
@@ -85,7 +85,7 @@ export default defineComponent({
   }),
   props: {
     items: {
-      type: Object as BaseData<EstateItem>,
+      type: Object as PropType<BaseData<EstateItem>>,
       required: true,
     },
     filters: {

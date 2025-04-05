@@ -4,6 +4,9 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'RandomFactSection',
+  data: () => ({
+    fact: '',
+  }),
   methods: {
     async initFact() {
       this.fact = await UselessService.randomFact();

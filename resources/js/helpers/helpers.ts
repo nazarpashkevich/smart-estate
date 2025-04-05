@@ -1,6 +1,6 @@
 import { SelectOption } from '@/contracts/base';
 
-export function enumToSelectOptions(enumItem: any): SelectOption {
+export function enumToSelectOptions(enumItem: any): SelectOption[] {
   if (typeof enumItem !== 'object') {
     throw new Error('Parameter is not enum!');
   }
